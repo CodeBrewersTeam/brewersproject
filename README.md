@@ -10,13 +10,17 @@ RoomEase is a roommate management system designed to streamline communication an
 
 ## Wire Frame
 
+![Wireframe](wireframe.png)
 
 
 ## Domain Model
 
+![Wireframe](domainmodel.png)
 
 
 ## Data Schema
+
+![Wireframe](dataschema.png)
 
 
 ## Link to User Stories/Trello Board
