@@ -2,7 +2,7 @@
 
 # Project Title:
 
-## Members: Wasim Soomro, Alex Chao Jon Stillson, Jennifer Sung
+## Members: Alex Chao, Wasim Soomro, Jon Stillson, Jennifer Sung
 
 ## Description
 
