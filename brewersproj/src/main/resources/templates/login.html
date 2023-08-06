@@ -47,24 +47,30 @@
 
             <h2>Don't have an account? <a href="/signup">Sign up</a></h2>
 
-            <!--  <h2>(or sign up <a href="/signup">here</a>)</h2>-->
-            <h1>Log in</h1>
             <form action="/login" method="POST">
+                <!-- Username -->
+
                 <label for="username" id="username">Username</label>
                 <input type="text" name="username">
 
+                <!-- Password -->
                 <label for="password">Password</label>
                 <input type="password" name="password" id="password">
 
+                <!-- Household ID -->
+                <label for="householdid">Household ID</label>
+                <input type="text" name="householdid" id="householdid">
+
                 <input type="submit" value="Log in">
             </form>
+
 
         </div>
 
 
         <div>
-            <img src="https://placehold.co/700x800" alt="roommates.jpg">
-<!--            <img src="/roommates.jpg" alt="Roommates" style="max-width: 100%;">-->
+<!--            <img src="https://placehold.co/700x800" alt="roommates.jpg">-->
+            <img src="roommates.jpg" alt="Roommates" style="width: 700px; height: 580px; max-width: 100%;">
         </div>
     </article>
 </main>

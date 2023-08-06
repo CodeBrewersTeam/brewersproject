@@ -118,30 +118,5 @@
 <!--</body>-->
 <!--</html>-->
 
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Chore Tracker</title>
-</head>
-<body>
-<h1>Chore Tracker</h1>
-
-<table>
-    <tr>
-        <th>Chore</th>
-        <th>Assigned To</th>
-        <th>Due Date</th>
-        <th>Completion Status</th>
-    </tr>
-    <tr th:each="chore : ${chores}">
-        <td th:text="${chore.name}"></td>
-        <td th:text="${chore.assignedTo}"></td>
-        <td th:text="${chore.dueDate}"></td>
-        <td th:text="${chore.isComplete ? 'Complete' : 'Pending'}"></td>
-    </tr>
-</table>
-</body>
-</html>
-
 
 
