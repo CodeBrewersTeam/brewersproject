@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Signup</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+</head>
+<body>
+<main class="container">
+
+  <h1 class="text-center">Signup with RoomEase</h1>
+
+
+  <p> Already have an account? <a href="/login">Login</a></p>
+  <form action="/signup" method="post">
+
+
+    <fieldset>
+      <legend>User Information</legend>
+
+      <label>First Name:</label>
+      <input type="text" name="firstName"/>
+
+      <label>Last Name:</label>
+      <input type="text" name="lastName"/>
+
+      <label>Username:</label>
+      <input type="text" name="username"/>
+
+      <label>Password:</label>
+      <input type="password" name="password"/>
+
+      <label>Household ID:</label>
+      <input type="text" name="householdId"/>
+
+      <label>Role:</label>
+      <select name="role">
+        <option value="admin">Admin</option>
+        <option value="roommate">Roommate</option>
+        <option value="guest">Guest</option>
+      </select>
+
+      <label>Telephone:</label>
+      <input type="tel" name="telephone"/>
+
+      <input type="submit" value="Sign up"/>
+    </fieldset>
+  </form>
+</main>
+</body>
+</html>
