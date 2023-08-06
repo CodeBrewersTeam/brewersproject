@@ -4,6 +4,8 @@
     <title>About Us</title>
 
 
+<!--    <link rel="stylesheet" type="text/css" href="/aboutUsStyles.css">-->
+
 <!--    !!!!copy and past this to this aboutUsStyle.css  !!!!-->
     <style>
         body {
@@ -79,6 +81,30 @@
             margin: 8px;
         }
 
+
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .nav-button {
+            padding: 5px 10px;
+            text-decoration: none;
+            color: white;
+            transition: color 0.3s;
+        }
+
+        .nav-button:hover {
+            color: #007bff;
+        }
+
+        .nav-button:not(:last-child)::after {
+            content: '/';
+            margin: 0 5px;
+            color: #999;
+        }
+
         @media screen and (max-width: 650px) {
             .column {
                 flex: 0 0 50%;
@@ -95,7 +121,17 @@
 
 <div class="about-section">
     <h1>About Us</h1>
+
+    <div class="nav-buttons">
+        <a href="#myProfile" class="nav-button">My Profile</a>
+        <a href="#myFlat" class="nav-button">My Flat</a>
+        <a href="#choreTracker" class="nav-button">Chore Tracker</a>
+        <a href="#logout" class="nav-button">Logout</a>
+    </div>
+
 </div>
+
+
 
 
 <h2 style="text-align:center">Meet the Team</h2>
