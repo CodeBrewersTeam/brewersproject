@@ -39,6 +39,6 @@ out/
 
 
 ##application.prop
-brewersproj/src/main/resources/application.properties
-src/main/resources/application.properties
-/application.properties
+#brewersproj/src/main/resources/application.properties
+#src/main/resources/application.properties
+#/application.properties
