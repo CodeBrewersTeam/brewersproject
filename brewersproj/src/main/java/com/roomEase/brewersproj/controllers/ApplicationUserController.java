@@ -16,6 +16,8 @@ import java.security.Principal;
 
 @Controller
 public class ApplicationUserController {
+
+
     @Autowired
     ApplicationUserRepository applicationUserRepository;
 
@@ -28,19 +30,19 @@ public class ApplicationUserController {
 
 
 
-    //http://localhost:8080/login :this is the login/signup page
+    // Mapping for login page
     @GetMapping("/login")
     public String getLoginPage() {
         return "login.html";
     }
 
-    //http://localhost:8080/signup: create an account on this page. Once you signup you're redirected to http://localhost:8080/login
+    // Mapping for signup page
     @GetMapping("/signup")
     public String getSignUpPage(){
         return "signup.html";
     }
 
-    // this handles the signup form, once submitted user is redirected to http://localhost:8080/ (index.html). Not login
+    // Mapping for signup form submission
     @PostMapping("/signup")
     public RedirectView postSignup(String firstName, String lastName, String username, String password, String email, String householdId, String role, Integer telephone) {
         ApplicationUser user = new ApplicationUser();
@@ -54,39 +56,55 @@ public class ApplicationUserController {
         user.setTelephone(telephone);
 
         applicationUserRepository.save(user);
+
+        // Authenticate the user
         authWithHttpServletRequest(username, password);
 
-        //after completing form, user is redirected to login page.
+        // Redirect to login page
         //  return new RedirectView("/");
         return new RedirectView("/login");
     }
 
 
-    // This is to authenticate user by username and password
+    // Method to authenticate user by username and password
     // NOTE: we need to figure out how to authenticate by householdId ? current service only does password and username
-    public void authWithHttpServletRequest(String username, String password){
+    public void authWithHttpServletRequest(String username, String password) {
         try {
+            System.out.println("Authenticating user: " + username);
+
             request.login(username, password);
-        } catch(ServletException e){
-            System.out.println("Error");
+        } catch (ServletException e) {
+            System.out.println("Error during authentication");
             e.printStackTrace();
         }
     }
 
 
+    @GetMapping("/")
+    public String getIndexPage(Model model, Principal principal) {
 
-
-    // my profile stuff
-    @GetMapping("/myprofile")
-    public String getProfileInfo(Model m, Principal p) {
-        if(p != null){
-            String username = p.getName();
-            ApplicationUser currentUser = applicationUserRepository.findByUsername(username);
-            m.addAttribute("currentUser", currentUser);
-            m.addAttribute("username", username);
+        if(principal != null){
+            String username = principal.getName();
+            ApplicationUser user = applicationUserRepository.findByUsername(username);
+            model.addAttribute("username", username);
         }
-        return "myprofile.html";
+        return "index.html";
     }
+
+
+    // Mapping for user's profile page
+    @GetMapping("/myprofile")
+    public String getUserProfile(Model model, Principal principal) {
+        if(principal != null){
+            String username = principal.getName();
+            ApplicationUser currentUser = applicationUserRepository.findByUsername(username);
+            model.addAttribute("currentUser", currentUser);
+            model.addAttribute("username", username);
+        }
+        return "myprofile";
+    }
+
+
 
 
 }
