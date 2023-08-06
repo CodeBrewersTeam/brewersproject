@@ -1,5 +1,7 @@
 package com.roomEase.brewersproj.controllers;
 
+public class ChoreTrackerController {
+
 //import com.roomEase.brewersproj.models.ApplicationUser;
 //import com.roomEase.brewersproj.models.Chore;
 //import com.roomEase.brewersproj.repositories.ApplicationUserRepository;
@@ -46,4 +48,4 @@ package com.roomEase.brewersproj.controllers;
 //        return "redirect:/choretracker";
 //    }
 //}
-
+}
