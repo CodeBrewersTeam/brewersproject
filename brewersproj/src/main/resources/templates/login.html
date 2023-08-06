@@ -10,22 +10,24 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
 
-    <link rel="stylesheet" href="signinStyles.css" />
+    <link rel="stylesheet" href="loginStyles.css" />
+
+<!--icon house-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
 
+    <!--   !!!! copy and paste everything between <style> tage to loginstyles.css; after you do add the link to connect css style to this html, then delete !!!!-->
+<!--    <style>-->
+<!--        .roomease-text {-->
+<!--            font-size: 50px;-->
+<!--        }-->
 
-<!--    copy and past to signinstyles.css-->
-    <style>
-        .roomease-text {
-            font-size: 50px;
-        }
-
-        .roomease-icon {
-            width: 50px;
-            height: 50px;
-            margin-bottom: 15px;
-        }
-    </style>
+<!--        .roomease-icon {-->
+<!--            width: 50px;-->
+<!--            height: 50px;-->
+<!--            margin-bottom: 15px;-->
+<!--        }-->
+<!--    </style>-->
 
 
 
@@ -37,9 +39,11 @@
 <nav class="container-fluid">
     <ul>
         <li>
-<!--            <a><strong class="roomease-text">RoomEase</strong></a>-->
-            <a href="#" class="roomease-text">
-                <img src="home.svg" alt="Home" class="roomease-icon">
+            <a href="/" class="roomease-text">
+
+<!--                <img src="/img/home.svg" alt="./img/home.svg" class="roomease-icon">-->
+                <i class="fas fa-house-user roomease-icon"></i>
+
                 <strong>RoomEase</strong>
             </a>
         </li>
@@ -72,8 +76,8 @@
                 <input type="password" name="password" id="password">
 
                 <!-- Household ID -->
-                <label for="householdid">Household ID</label>
-                <input type="text" name="householdid" id="householdid">
+<!--                <label for="householdid">Household ID</label>-->
+<!--                <input type="text" name="householdid" id="householdid">-->
 
                 <input type="submit" value="Log in">
             </form>
@@ -84,7 +88,9 @@
 
         <div>
 <!--            <img src="https://placehold.co/700x800" alt="roommates.jpg">-->
-            <img src="roommates.jpg" alt="Roommates" style="width: 700px; height: 710px; max-width: 100%;">
+<!--            <img src="/img/roommates.jpg" alt="Roommates" style="width: 700px; height: 710px; max-width: 100%;">-->
+                <img src="https://images.unsplash.com/photo-1582298538104-fe2e74c27f59?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Roommates" style="width: 700px; height: 710px; max-width: 100%;">
+
         </div>
     </article>
 </main>
