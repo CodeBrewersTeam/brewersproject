@@ -1,13 +1,26 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <title>myFlat</title>
+<html xmlns:th="http://www.thymeleaf.org">
 
+<head>
+    <meta charset="UTF-8">
+    <title>My Flatmates</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
 </head>
 <body>
-<h1>See my flat mates</h1>
 <div th:replace="fragments/header :: nav"></div>
 <nav></nav>
 
+<main class="container">
+    <h1>All My Flatmates</h1>
+    <article th:each="user : ${users}">
+        <a th:href="@{/users/{id}(id=${user.id})}">
+            <h2 th:text="${user.firstName + ' ' + user.lastName}"></h2>
+        </a>
+        <p th:text="${'Username: ' + user.username}"></p>
+        <p th:text="${'Email: ' + user.email}"></p>
+        <p th:text="${'Phone: ' + user.telephone}"></p>
+        <a href="#" role="button" style="background-color: red; color: white;">Delete</a>
+    </article>
+</main>
 </body>
 </html>
