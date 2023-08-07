@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>About Us</title>
 
@@ -117,6 +117,7 @@
 
 
 
+
 </head>
 <body>
 
@@ -126,12 +127,13 @@
     <h1>Meet the Team</h1>
 
 
-
+    <div th:replace="fragments/header :: nav"></div>
     <div class="nav-buttons">
         <a href="#myProfile" class="nav-button">My Profile</a>
         <a href="#myFlat" class="nav-button">My Flat</a>
         <a href="#choreTracker" class="nav-button">Chore Tracker</a>
-        <a href="#logout" class="nav-button">Logout</a>
+        <a href="#login" class="nav-button">Login</a>
+
     </div>
 
 </div>
