@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="f65e0197-2530-4374-ab37-cb62fcecc9c4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/main/java/com/roomEase/brewersproj/controllers/ChoreTrackerController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/java/com/roomEase/brewersproj/models/Chore.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/java/com/roomEase/brewersproj/repositories/ApplicationUserRepo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/resources/static/aboutUsStyles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/resources/static/choresTrackerStyles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/com/roomEase/brewersproj/configs/UserDetailsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/com/roomEase/brewersproj/configs/UserDetailsServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/com/roomEase/brewersproj/models/ApplicationUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/com/roomEase/brewersproj/models/ApplicationUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/com/roomEase/brewersproj/repositories/ApplicationUserRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/resources/static/styles.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/resources/templates/aboutUs.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/resources/templates/aboutUs.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/resources/templates/choresTracker.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/resources/templates/choresTracker.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="2Taps76UHek8qPToV9Jy6OZwREZ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/jennifersung/projects/brewersproject/brewersproj/src",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f65e0197-2530-4374-ab37-cb62fcecc9c4" name="Changes" comment="" />
+      <created>1691291249579</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1691291249579</updated>
+      <workItem from="1691291250610" duration="21000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
