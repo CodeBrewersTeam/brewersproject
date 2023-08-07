@@ -19,10 +19,11 @@ public class ApplicationUser implements UserDetails {
     String email;
     String householdId;
     String role;
-    Integer telephone;
+    Long telephone;
 
 
-    public ApplicationUser(Long id, String firstName, String lastName, String username, String password, String email, String householdId, String role, Integer telephone) {
+
+    public ApplicationUser(Long id, String firstName, String lastName, String username, String password, String email, String householdId, String role, Long telephone) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -92,11 +93,11 @@ public class ApplicationUser implements UserDetails {
         this.role = role;
     }
 
-    public Integer getTelephone() {
+    public Long getTelephone() {
         return telephone;
     }
 
-    public void setTelephone(Integer telephone) {
+    public void setTelephone(Long telephone) {
         this.telephone = telephone;
     }
 
