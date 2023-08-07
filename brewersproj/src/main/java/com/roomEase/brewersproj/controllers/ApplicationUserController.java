@@ -42,6 +42,12 @@ public class ApplicationUserController {
         return "signup.html";
     }
 
+
+    @GetMapping("/aboutUs")
+    public String aboutUsPage() {
+        return "aboutUs.html"; //
+    }
+
     // Mapping for signup form submission
     @PostMapping("/signup")
     public RedirectView postSignup(String firstName, String lastName, String username, String password, String email, String householdId, String role, Long telephone) {
