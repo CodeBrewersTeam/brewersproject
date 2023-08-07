@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class ApplicationUserController {
@@ -94,7 +95,19 @@ public class ApplicationUserController {
     }
 
 
+    @GetMapping("/users")
+    public String getUsersByHouseholdId(Model m, Principal p) {
+        String currentUserUsername = p.getName();
+        ApplicationUser currentUser = applicationUserRepository.findByUsername(currentUserUsername);
 
+        if(currentUser != null) {
+        List<ApplicationUser> usersInSameHousehold = applicationUserRepository.findByHouseholdId(currentUser.getHouseholdId());
+        m.addAttribute("users", usersInSameHousehold);
+
+        }
+
+        return "myFlat.html";
+    }
 
 
 
