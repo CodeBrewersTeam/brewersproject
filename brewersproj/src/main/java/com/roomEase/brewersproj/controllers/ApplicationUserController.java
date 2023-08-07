@@ -110,8 +110,6 @@ public class ApplicationUserController {
     }
 
 
-
-
     // EVERYTHING above is working. You should be able to login and go to myprofiles page and create account
 
 
