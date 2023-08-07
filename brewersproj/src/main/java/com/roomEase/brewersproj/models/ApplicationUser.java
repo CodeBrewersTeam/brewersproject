@@ -21,8 +21,6 @@ public class ApplicationUser implements UserDetails {
     String role;
     Long telephone;
 
-
-
     public ApplicationUser(Long id, String firstName, String lastName, String username, String password, String email, String householdId, String role, Long telephone) {
         this.id = id;
         this.firstName = firstName;
@@ -36,9 +34,7 @@ public class ApplicationUser implements UserDetails {
     }
 
     public ApplicationUser() {
-
     }
-
 
     public Long getId() {
         return id;

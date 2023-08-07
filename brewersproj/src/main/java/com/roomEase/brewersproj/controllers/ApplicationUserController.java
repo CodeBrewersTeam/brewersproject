@@ -17,18 +17,14 @@ import java.security.Principal;
 @Controller
 public class ApplicationUserController {
 
-
     @Autowired
     ApplicationUserRepository applicationUserRepository;
-
 
     @Autowired
     PasswordEncoder passwordEncoder;
 
     @Autowired
     HttpServletRequest request;
-
-
 
     // Mapping for login page
     @GetMapping("/login")
