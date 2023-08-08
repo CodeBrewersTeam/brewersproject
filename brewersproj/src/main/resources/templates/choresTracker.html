@@ -108,76 +108,232 @@
         .day-Saturday {
             background-color: #E5F7FF;
         }
+
     </style>
 </head>
 <body>
 <header>
+
     <h1>Chore Tracker</h1>
 </header>
 <div class="container">
+    <h2>Chores for the Week:</h2>
+
+    <div class="calendar">
+        <!-- Sunday -->
+        <div class="day day-Sunday">
+            <h3>Sunday</h3>
+            <form action="/addSundayChore" method="post">
+                <label for="sundayUser">Roommate:</label>
+                <select id="sundayUser" name="userId" required>
+                    <option value="" disabled selected>Select a Roommate</option>
+                    <option th:each="user : ${allUsers}" th:value="${user.id}" th:text="${user.username}"></option>
+                </select>
+
+                <label for="sundayDescription">Description:</label>
+                <input type="text" id="sundayDescription" name="description" required />
+                <button type="submit">Add Chore for Sunday</button>
+            </form>
 
 
 
-    <h2 class="day-Sunday" >Sunday Tasks:</h2>
-    <div th:each="task : ${sundayTasks}">
-        <h3 th:text="${task.name}"></h3>
-    <form action="/addSundayChore" method="post">
-        <label for="name">Task Name:</label>
-        <input type="text" id="name" name="name" required />
-        <label for="dueDate">Due Date:</label>
-        <input type="date" id="dueDate" name="dueDate" required />
-        <label for="description">Description:</label>
-        <input type="text" id="description" name="description" required />
+            <div th:each="sundayChore : ${sundayChores}" class="chore">
+                <h4 th:text="${sundayChore.name}"></h4>
+                <p>Assigned Roommate:
+                    <span th:each="user : ${sundayChore.assignedUsers}">
+                <span th:text="${user.username} + ' '"></span>
+            </span>
+                </p>
+                <p th:text="${'Description: ' + sundayChore.description}"></p>
 
-        <label for="users">Assign to:</label>
-        <select name="users" id="users" multiple>
-            <option th:each="user : ${roommates}" th:value="${user.id}" th:text="${user.username}"></option>
-        </select>
-        <button type="submit">Add Task</button>
+                <form th:action="@{'/deleteChore/' + ${sundayChore.id}}" method="get" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Monday -->
+        <div class="day day-Monday">
+            <h3>Monday</h3>
+            <form action="/addMondayChore" method="post">
+                <label for="mondayUser">Roommate:</label>
+                <select id="mondayUser" name="userId" required>
+                    <option value="" disabled selected>Select a Roommate</option>
+                    <option th:each="user : ${allUsers}" th:value="${user.id}" th:text="${user.username}"></option>
+                </select>
+
+                <label for="mondayDescription">Description:</label>
+                <input type="text" id="mondayDescription" name="description" required />
+                <button type="submit">Add Chore for Monday</button>
+            </form>
+
+            <div th:each="mondayChore : ${mondayChores}" class="chore">
+                <h4 th:text="${mondayChore.name}"></h4>
+                <p>Assigned Roommate:
+                    <span th:each="user : ${mondayChore.assignedUsers}">
+                <span th:text="${user.username} + ' '"></span>
+            </span>
+                </p>
+                <p th:text="${'Description: ' + mondayChore.description}"></p>
+                <form th:action="@{'/deleteChore/' + ${mondayChore.id}}" method="get" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </div>
+        </div>
+
+
+        <!-- Tuesday -->
+        <div class="day day-Tuesday">
+            <h3>Tuesday</h3>
+            <form action="/addTuesdayChore" method="post">
+                <label for="tuesdayUser">Roommate:</label>
+                <select id="tuesdayUser" name="userId" required>
+                    <option value="" disabled selected>Select a Roommate</option>
+                    <option th:each="user : ${allUsers}" th:value="${user.id}" th:text="${user.username}"></option>
+                </select>
+
+                <label for="tuesdayDescription">Description:</label>
+                <input type="text" id="tuesdayDescription" name="description" required />
+                <button type="submit">Add Chore for Tuesday</button>
+            </form>
+
+            <div th:each="tuesdayChore : ${tuesdayChores}" class="chore">
+                <h4 th:text="${tuesdayChore.name}"></h4>
+                <p>Assigned Roommate:
+                    <span th:each="user : ${tuesdayChore.assignedUsers}">
+                <span th:text="${user.username} + ' '"></span>
+            </span>
+                </p>
+                <p th:text="${'Description: ' + tuesdayChore.description}"></p>
+                <form th:action="@{'/deleteChore/' + ${tuesdayChore.id}}" method="get" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </div>
+        </div>
+
+
+        <!-- Wednesday -->
+        <div class="day day-Wednesday">
+            <h3>Wednesday</h3>
+            <form action="/addWednesdayChore" method="post">
+                <label for="wednesdayUser">Roommate:</label>
+                <select id="wednesdayUser" name="userId" required>
+                    <option value="" disabled selected>Select a Roommate</option>
+                    <option th:each="user : ${allUsers}" th:value="${user.id}" th:text="${user.username}"></option>
+                </select>
+
+                <label for="wednesdayDescription">Description:</label>
+                <input type="text" id="wednesdayDescription" name="description" required />
+                <button type="submit">Add Chore for Wednesday</button>
+            </form>
+
+            <div th:each="wednesdayChore : ${wednesdayChores}" class="chore">
+                <h4 th:text="${wednesdayChore.name}"></h4>
+                <p>Assigned Roommate:
+                    <span th:each="user : ${wednesdayChore.assignedUsers}">
+                <span th:text="${user.username} + ' '"></span>
+            </span>
+                </p>
+                <p th:text="${'Description: ' + wednesdayChore.description}"></p>
+                <form th:action="@{'/deleteChore/' + ${wednesdayChore.id}}" method="get" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </div>
+        </div>
+
+
+        <!-- Thursday -->
+        <div class="day day-Thursday">
+            <h3>Thursday</h3>
+            <form action="/addThursdayChore" method="post">
+                <label for="thursdayUser">Roommate:</label>
+                <select id="thursdayUser" name="userId" required>
+                    <option value="" disabled selected>Select a Roommate</option>
+                    <option th:each="user : ${allUsers}" th:value="${user.id}" th:text="${user.username}"></option>
+                </select>
+
+                <label for="thursdayDescription">Description:</label>
+                <input type="text" id="thursdayDescription" name="description" required />
+                <button type="submit">Add Chore for Thursday</button>
+            </form>
+
+            <div th:each="thursdayChore : ${thursdayChores}" class="chore">
+                <h4 th:text="${thursdayChore.name}"></h4>
+                <p>Assigned Roommate:
+                    <span th:each="user : ${thursdayChore.assignedUsers}">
+                <span th:text="${user.username} + ' '"></span>
+            </span>
+                </p>
+                <p th:text="${'Description: ' + thursdayChore.description}"></p>
+                <form th:action="@{'/deleteChore/' + ${thursdayChore.id}}" method="get" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Friday -->
+        <div class="day day-Friday">
+            <h3>Friday</h3>
+            <form action="/addFridayChore" method="post">
+                <label for="fridayUser">Roommate:</label>
+                <select id="fridayUser" name="userId" required>
+                    <option value="" disabled selected>Select a Roommate</option>
+                    <option th:each="user : ${allUsers}" th:value="${user.id}" th:text="${user.username}"></option>
+                </select>
+
+                <label for="fridayDescription">Description:</label>
+                <input type="text" id="fridayDescription" name="description" required />
+                <button type="submit">Add Chore for Friday</button>
+            </form>
+
+            <div th:each="fridayChore : ${fridayChores}" class="chore">
+                <h4 th:text="${fridayChore.name}"></h4>
+                <p>Assigned Roommate:
+                    <span th:each="user : ${fridayChore.assignedUsers}">
+                <span th:text="${user.username} + ' '"></span>
+            </span>
+                </p>
+                <p th:text="${'Description: ' + fridayChore.description}"></p>
+                <form th:action="@{'/deleteChore/' + ${fridayChore.id}}" method="get" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Saturday -->
+        <div class="day day-Saturday">
+            <h3>Saturday</h3>
+            <form action="/addSaturdayChore" method="post">
+                <label for="saturdayUser">Roommate:</label>
+                <select id="saturdayUser" name="userId" required>
+                    <option value="" disabled selected>Select a Roommate</option>
+                    <option th:each="user : ${allUsers}" th:value="${user.id}" th:text="${user.username}"></option>
+                </select>
+
+                <label for="saturdayDescription">Description:</label>
+                <input type="text" id="saturdayDescription" name="description" required />
+                <button type="submit">Add Chore for Saturday</button>
+            </form>
+
+            <div th:each="saturdayChore : ${saturdayChores}" class="chore">
+                <h4 th:text="${saturdayChore.name}"></h4>
+                <p>Assigned Roommate:
+                    <span th:each="user : ${saturdayChore.assignedUsers}">
+                <span th:text="${user.username} + ' '"></span>
+            </span>
+                </p>
+                <p th:text="${'Description: ' + saturdayChore.description}"></p>
+                <form th:action="@{'/deleteChore/' + ${saturdayChore.id}}" method="get" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </div>
+        </div>
+
+
+
+
+
     </div>
-
-    </form>
-
-    <form action="/choresTrackersunday" method="post">
-        <div class="calendar">
-            <div class="day-Sunday">
-                <h2>Sunday</h2>
-                <div class="tasks">
-                    <div th:each="chore : ${chores}" class="task">
-                        <h3 th:text="${chore.name}"></h3>
-                        <input type="checkbox" th:checked="${taskAssignments['Sunday'][chore.id]}" th:field="*{taskAssignments['Sunday'][chore.id]}"/>
-                        <label for="completed">Completed</label>
-                        <input type="text" th:field="*{taskDescriptions[chore.id]}" placeholder="Task description"/>
-                        <input type="text" th:field="*{usersAssignments['Sunday'][chore.id]}" placeholder="Assign users (comma-separated)"/>
-                        <label th:text="${usersAssignments['Sunday'][chore.id] != null ? 'Assigned to: ' + usersAssignments['Sunday'][chore.id] : 'Not Assigned'}"></label>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <button type="submit" class="save-btn">Save Chores</button>
-    </form>
-
-
-    <form action="/choresTrackermonday" method="post">
-        <div class="calendar">
-            <div class="day day-Monday">
-                <h2>Monday</h2>
-                <div class="tasks">
-                    <div th:each="chore : ${chores}" class="task">
-                        <h3 th:text="${chore.name}"></h3>
-                        <input type="checkbox" th:checked="${taskAssignments['monday'][chore.id]}" th:field="*{taskAssignments['monday'][chore.id]}"/>
-                        <label for="completed">Completed</label>
-                        <input type="text" th:field="*{taskDescriptions[chore.id]}" placeholder="Task description"/>
-                        <input type="text" th:field="*{usersAssignments['monday'][chore.id]}" placeholder="Assign users (comma-separated)"/>
-                        <label th:text="${usersAssignments['monday'][chore.id] != null ? 'Assigned to: ' + usersAssignments['monday'][chore.id] : 'Not Assigned'}"></label>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <button type="submit" class="save-btn">Save Chores</button>
-    </form>
-
-
 
     <h2>Things that need to get done the following week:</h2>
     <form action="/addChore" method="post">
@@ -204,4 +360,3 @@
 </div>
 </body>
 </html>
-

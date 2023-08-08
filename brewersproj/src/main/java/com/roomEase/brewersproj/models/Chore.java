@@ -18,32 +18,57 @@ public class Chore {
     private boolean isCompleted;
     private String task;
     private String description;
-    private String dayOfWeek;
+//    private String dayOfWeek;
 
     public Chore() {
     }
 
-    public Chore(String name, LocalDate dueDate, boolean isCompleted, String task, String description) {
+    public Chore(String name, LocalDate dueDate, boolean isCompleted, String task, String description, String dayOfWeek) {
         this.name = name;
         this.dueDate = dueDate;
         this.isCompleted = isCompleted;
         this.task = task;
         this.description = description;
+        this.dayOfWeek = dayOfWeek;
     }
 
 
+    //maybe this is issue?
+    @Column(name="day_of_week")
+    private String dayOfWeek;
 
 
     //The Chore class to include the many-to-many relationship with ApplicationUser.
     @ManyToMany(mappedBy = "chores")
     private List<ApplicationUser> users;
 
+//    @ManyToMany
+//    private Set<ApplicationUser> assignedUsers = new HashSet<>();
+
+
     @ManyToMany
     private Set<ApplicationUser> assignedUsers = new HashSet<>();
 
+//    public void setAssignedUsers(Set<ApplicationUser> assignedUsers) {
+//        this.assignedUsers = assignedUsers;
+//    }
 
-//    @OneToMany(mappedBy = "user")
-//    private List<PostUser> posts;
+
+    public List<ApplicationUser> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<ApplicationUser> users) {
+        this.users = users;
+    }
+
+    public Set<ApplicationUser> getAssignedUsers() {
+        return assignedUsers;
+    }
+
+    public void setAssignedUsers(Set<ApplicationUser> assignedUsers) {
+        this.assignedUsers = assignedUsers;
+    }
 
 
     public String getDayOfWeek() {
