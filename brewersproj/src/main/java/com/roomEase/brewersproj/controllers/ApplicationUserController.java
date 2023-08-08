@@ -109,7 +109,6 @@ public class ApplicationUserController {
         List<ApplicationUser> usersInSameHousehold = applicationUserRepository.findByHouseholdId(currentUser.getHouseholdId());
         m.addAttribute("users", usersInSameHousehold);
 
-
         }
 
         return "myFlat.html";
