@@ -45,7 +45,10 @@ public class ApplicationUserController {
         return "aboutUs.html"; //
     }
 
-
+    @GetMapping("/resoluteConflict")
+    public String resoluteConflictPage() {
+        return "resoluteConflict.html"; //
+    }
 
     // Mapping for signup form submission
     @PostMapping("/signup")

@@ -5,9 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7aa7b91b-18e7-4c61-bd47-601596f0c2fe" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brewersproj/src/main/java/com/roomEase/brewersproj/controllers/ApplicationUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/brewersproj/src/main/java/com/roomEase/brewersproj/controllers/ApplicationUserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/brewersproj/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/brewersproj/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brewersproj/src/main/resources/templates/myFlat.html" beforeDir="false" afterPath="$PROJECT_DIR$/brewersproj/src/main/resources/templates/myFlat.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brewersproj/src/main/resources/templates/aboutUs.html" beforeDir="false" afterPath="$PROJECT_DIR$/brewersproj/src/main/resources/templates/aboutUs.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brewersproj/src/main/resources/templates/fragments/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/brewersproj/src/main/resources/templates/fragments/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brewersproj/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/brewersproj/src/main/resources/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brewersproj/src/main/resources/templates/resolveConflict.html" beforeDir="false" afterPath="$PROJECT_DIR$/brewersproj/src/main/resources/templates/resolveConflict.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,21 +32,21 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="2TaEtXxh1U6CovZEkraF4Wmo5GU" />
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "nav",
-    "last_opened_file_path": "C:/Users/soomr/Documents/Projects/Code-401/brewersproject/brewersproj"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;nav&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/soomr/Documents/Projects/Code-401/brewersproject/brewersproj&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.roomEase.brewersproj.BrewersprojApplication" />
