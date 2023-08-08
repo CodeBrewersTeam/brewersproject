@@ -14,5 +14,8 @@ import java.time.LocalDate;
 public interface ChoreRepository extends JpaRepository<Chore, Long> {
     List<Chore> findAllByDueDateAfter(LocalDate currentDate);
 
+    List<Chore> findAllByDayOfWeek(String dayOfWeek);
+
+
 }
 
