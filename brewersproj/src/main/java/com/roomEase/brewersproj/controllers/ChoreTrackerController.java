@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -32,30 +33,69 @@ public class ChoreTrackerController {
 
 
 
+
+
+//    String currentUserUsername = principal.getName();
+//    ApplicationUserRepository applicationUserRepository;
+//    ApplicationUser currentUser = applicationUserRepository.findByUsername(currentUserUsername);
+//
+//        if(currentUser != null) {
+//        List<ApplicationUser> usersInSameHousehold = applicationUserRepository.findByHouseholdId(currentUser.getHouseholdId());
+//        model.addAttribute("users", usersInSameHousehold);
+
+
+
+
+//    @GetMapping("/choresTracker")
+//    public String getChoresTrackerPage(Model model, Principal principal) {
+//        List<ApplicationUser> allUsers = userRepository.findAll();
+//        List<String> roommates = allUsers.stream()
+//                .map(ApplicationUser::getUsername)
+//                .collect(Collectors.toList());
+//        List<Chore> chores = choreRepository.findAll();
+//        LocalDate currentDate = LocalDate.now();
+//        List<Chore> futureTasks = choreRepository.findAllByDueDateAfter(currentDate);
+//        Date currentDateAsDate = Date.from(currentDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+//
+//        model.addAttribute("choreForm", new ChoreForm(roommates, chores));
+//        model.addAttribute("futureTasks", futureTasks);
+//        model.addAttribute("allUsers", allUsers);
+//
+//        String[] days = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+//        for (String day : days) {
+//            List<Chore> dayChores = choreRepository.findAllByDayOfWeek(day);
+//            model.addAttribute(day.toLowerCase() + "Chores", dayChores);
+//        }
+//
+//        return "choresTracker.html";
+//    }
+
     @GetMapping("/choresTracker")
-    public String getChoresTrackerPage(Model model) {
-        List<ApplicationUser> allUsers = userRepository.findAll();
-        List<String> roommates = allUsers.stream()
+    public String getChoresTrackerPage(Model model, Principal principal) {
+        String currentUserUsername = principal.getName();
+        ApplicationUser currentUser = userRepository.findByUsername(currentUserUsername);
+        if(currentUser == null) {
+            // Handle this situation, maybe redirect to an error page or login
+            return "errorPage.html";
+        }
+        List<ApplicationUser> usersInSameHousehold = userRepository.findByHouseholdId(currentUser.getHouseholdId());
+        List<String> roommates = usersInSameHousehold.stream()
                 .map(ApplicationUser::getUsername)
                 .collect(Collectors.toList());
         List<Chore> chores = choreRepository.findAll();
         LocalDate currentDate = LocalDate.now();
         List<Chore> futureTasks = choreRepository.findAllByDueDateAfter(currentDate);
         Date currentDateAsDate = Date.from(currentDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-
         model.addAttribute("choreForm", new ChoreForm(roommates, chores));
         model.addAttribute("futureTasks", futureTasks);
-        model.addAttribute("allUsers", allUsers);
-
+        model.addAttribute("allUsers", usersInSameHousehold);
         String[] days = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
         for (String day : days) {
             List<Chore> dayChores = choreRepository.findAllByDayOfWeek(day);
             model.addAttribute(day.toLowerCase() + "Chores", dayChores);
         }
-
         return "choresTracker.html";
     }
-
 
     private String saveChoreForDay(ChoreForm choreForm, String day) {
         Chore chore = new Chore();

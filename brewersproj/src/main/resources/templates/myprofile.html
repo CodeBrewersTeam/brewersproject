@@ -3,85 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <title>My Profile</title>
+        <style>
+    <!--        body {-->
+    <!--            font-family: 'Arial', sans-serif;-->
+    <!--            background-color: #f4f4f4;-->
+    <!--            color: #333;-->
+    <!--            margin: 0;-->
+    <!--            padding: 0;-->
+    <!--            line-height: 1.6;-->
+    <!--        }-->
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <!--        .container {-->
+    <!--            width: 80%;-->
+    <!--            margin: auto;-->
+    <!--            background-color: #fff;-->
+    <!--            padding: 20px;-->
+    <!--            border-radius: 5px;-->
+    <!--            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);-->
+    <!--            margin-top: 50px;-->
+    <!--        }-->
 
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-        }
+    <!--        h1 {-->
+    <!--            text-align: center;-->
+    <!--            border-bottom: 2px solid #eee;-->
+    <!--            padding-bottom: 10px;-->
+    <!--            margin-bottom: 20px;-->
+    <!--        }-->
 
-        .container {
-            width: 80%;
-            margin: auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-top: 50px;
-        }
+    <!--        .profile-details {-->
+    <!--            display: flex;-->
+    <!--            justify-content: space-between;-->
+    <!--            align-items: center;-->
+    <!--        }-->
 
-        h1 {
-            text-align: center;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
+    <!--        .details {-->
+    <!--            flex: 1; /* This ensures that the details section takes up the remaining space after the image */-->
+    <!--        }-->
 
-        .profile-details {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+            .profile-pic {
+                width: 200px;
+                height: 200px;
+                border-radius: 50%;
+                margin-left: 20px;
+            }
 
-        .details {
-            flex: 1; /* This ensures that the details section takes up the remaining space after the image */
-        }
+    <!--        p {-->
+    <!--            margin: 15px 0;-->
+    <!--            font-size: 1.1em;-->
+    <!--        }-->
 
-        .profile-pic {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            margin-left: 20px;
-        }
+    <!--        p span.label {-->
+    <!--            font-weight: bold;-->
 
-        p {
-            margin: 15px 0;
-            font-size: 1.1em;
-        }
-
-        p span.label {
-            font-weight: bold;
-
-        }
-
-    </style>
+    <!--        }-->
+        </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"/>
 </head>
 <body>
-<div th:replace="fragments/header :: nav"></div>
 
+<main class="container">
+    <div th:replace="fragments/header :: nav"></div>
 
-<div class="container">
-    <h1>Welcome to My Profile</h1>
+    <div>
+        <h1>Welcome to My Profile</h1>
 
-    <div class="profile-details">
+        <article class="profile-details">
 
-        <div class="details">
+            <header><img
+                    src="https://images.unsplash.com/photo-1425082661705-1834bfd09dca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2076&q=80"
+                    alt="Profile Picture" class="profile-pic"></header>
             <p><span class="label">Username:</span> [[${username}]]</p>
             <p><span class="label">First Name:</span> [[${currentUser.firstName}]]</p>
             <p><span class="label">Last Name:</span> [[${currentUser.lastName}]]</p>
             <p><span class="label">Email:</span> [[${currentUser.email}]]</p>
-        </div>
 
-        <img src="https://images.unsplash.com/photo-1425082661705-1834bfd09dca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2076&q=80" alt="Profile Picture" class="profile-pic">
-
+        </article>
     </div>
-</div>
+
+</main>
 
 </body>
 </html>
