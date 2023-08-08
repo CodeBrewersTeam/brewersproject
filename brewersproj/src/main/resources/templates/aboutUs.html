@@ -5,67 +5,67 @@
 
 <!--    !!!!copy and past this to this aboutUsStyle.css, the style is in the html so I could view using local file url  !!!!-->
     <style>
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            margin: 0;
-        }
+<!--        body {-->
+<!--            font-family: Arial, Helvetica, sans-serif;-->
+<!--            margin: 0;-->
+<!--        }-->
 
-        html {
-            box-sizing: border-box;
-        }
+<!--        html {-->
+<!--            box-sizing: border-box;-->
+<!--        }-->
 
-        *, *:before, *:after {
-            box-sizing: inherit;
-        }
+<!--        *, *:before, *:after {-->
+<!--            box-sizing: inherit;-->
+<!--        }-->
 
-        .card {
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            margin: 8px;
-            text-align: center;
-        }
+<!--        .card {-->
+<!--            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);-->
+<!--            margin: 8px;-->
+<!--            text-align: center;-->
+<!--        }-->
 
-        .about-section {
-            padding: 50px;
-            text-align: center;
-            background-color: #474e5d;
-            color: white;
-            font-size: 30px;
-        }
+<!--        .about-section {-->
+<!--            padding: 50px;-->
+<!--            text-align: center;-->
+<!--            background-color: #474e5d;-->
+<!--            color: white;-->
+<!--            font-size: 30px;-->
+<!--        }-->
 
-        .container {
-            padding: 0 16px;
-            margin: 0 auto;
-        }
+<!--        .container {-->
+<!--            padding: 0 16px;-->
+<!--            margin: 0 auto;-->
+<!--        }-->
 
-        .container::after, .row::after {
-            content: "";
-            clear: both;
-            display: table;
-        }
+<!--        .container::after, .row::after {-->
+<!--            content: "";-->
+<!--            clear: both;-->
+<!--            display: table;-->
+<!--        }-->
 
-        .title {
-            color: grey;
-        }
+<!--        .title {-->
+<!--            color: grey;-->
+<!--        }-->
 
-        .button {
-            border: none;
-            outline: none;
-            display: inline-block;
-            padding: 8px 16px;
-            color: white;
-            background-color: #007bff;
-            text-align: center;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: background-color 0.3s ease;
-            font-size: 14px;
-            line-height: 1.5;
-            text-decoration: none;
-        }
+<!--        .button {-->
+<!--            border: none;-->
+<!--            outline: none;-->
+<!--            display: inline-block;-->
+<!--            padding: 8px 16px;-->
+<!--            color: white;-->
+<!--            background-color: #007bff;-->
+<!--            text-align: center;-->
+<!--            cursor: pointer;-->
+<!--            border-radius: 4px;-->
+<!--            transition: background-color 0.3s ease;-->
+<!--            font-size: 14px;-->
+<!--            line-height: 1.5;-->
+<!--            text-decoration: none;-->
+<!--        }-->
 
-        .button:hover {
-            background-color: #0056b3;
-        }
+<!--        .button:hover {-->
+<!--            background-color: #0056b3;-->
+<!--        }-->
 
         .row {
             display: flex;
@@ -75,106 +75,117 @@
         .column {
             flex: 0 0 calc(25% - 16px);
             max-width: calc(25% - 16px);
-            margin: 8px;
+            margin: 10px;
         }
 
 
-        .nav-buttons {
-            display: flex;
-            justify-content: center;
-            padding: 10px;
-        }
+<!--        .nav-buttons {-->
+<!--            display: flex;-->
+<!--            justify-content: center;-->
+<!--            padding: 10px;-->
+<!--        }-->
 
-        .nav-button {
-            padding: 5px 10px;
-            text-decoration: none;
-            color: white;
-            transition: color 0.3s;
-        }
+<!--        .nav-button {-->
+<!--            padding: 5px 10px;-->
+<!--            text-decoration: none;-->
+<!--            color: white;-->
+<!--            transition: color 0.3s;-->
+<!--        }-->
 
-        .nav-button:hover {
-            color: #007bff;
-        }
+<!--        .nav-button:hover {-->
+<!--            color: #007bff;-->
+<!--        }-->
 
-        .nav-button:not(:last-child)::after {
-            content: '/';
-            margin: 0 5px;
-            color: #999;
-        }
+<!--        .nav-button:not(:last-child)::after {-->
+<!--            content: '/';-->
+<!--            margin: 0 5px;-->
+<!--            color: #999;-->
+<!--        }-->
 
-        @media screen and (max-width: 650px) {
-            .column {
-                flex: 0 0 50%;
-                max-width: 50%;
-            }
-        }
+<!--        @media screen and (max-width: 650px) {-->
+<!--            .column {-->
+<!--                flex: 0 0 50%;-->
+<!--                max-width: 50%;-->
+<!--            }-->
+<!--        }-->
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"/>
 
 </head>
 <body>
 
+<main class="container">
 <div class="about-section">
-
-    <h1>Meet the Team</h1>
-
     <div th:replace="fragments/header :: nav"></div>
-    <div class="nav-buttons">
-        <a href="#myProfile" class="nav-button">My Profile</a>
-        <a href="#myFlat" class="nav-button">My Flat</a>
-        <a href="#choreTracker" class="nav-button">Chore Tracker</a>
-        <a href="#login" class="nav-button">Login</a>
-
-    </div>
+    <h1>Meet the Team</h1>
 </div>
 
 <!--<h2 style="text-align:center">Meet the Team</h2>-->
 
 <div class="row">
     <div class="column">
-        <div class="card">
+        <article class="card">
             <img src="https://placehold.co/150x150" alt="jennifer" style="width:100%">
             <div class="container">
-                <h2>Jennifer Sung</h2>
-                <p class="title">Full-stack Developer</p>
-                <p><a href="https://www.linkedin.com/in/jennisung/" class="button primary" role="button">LinkedIn</a></p>
+                <header>
+                    <h2>Jennifer Sung</h2>
+                    <p class="title">Full-stack Developer</p>
+                </header>
+                <footer>
+                    <p><a href="https://www.linkedin.com/in/jennisung/" class="button primary" role="button">LinkedIn</a></p>
+                </footer>
             </div>
-        </div>
+        </article>
     </div>
 
     <div class="column">
-        <div class="card">
-            <img src="https://placehold.co/150x150" alt="Alex" style="width:100%">
+        <article class="card">
+            <img src="https://placehold.co/150x150" alt="jennifer" style="width:100%">
             <div class="container">
-                <h2>Alex Chao</h2>
-                <p class="title">Full-stack Developer</p>
-                <p><a href="https://www.linkedin.com/" class="button">LinkedIn</a></p>
+                <header>
+                    <h2>Alex Chao</h2>
+                    <p class="title">Full-stack Developer</p>
+                </header>
+                <footer>
+                    <p><a href="https://www.linkedin.com/in/chao-alex-sae/" class="button primary" role="button">LinkedIn</a></p>
+                </footer>
             </div>
-        </div>
+        </article>
     </div>
 
     <div class="column">
-        <div class="card">
-            <img src="https://placehold.co/150x150" alt="Wasim" style="width:100%">
+        <article class="card">
+            <img src="https://placehold.co/150x150" alt="jennifer" style="width:100%">
             <div class="container">
-                <h2>Wasim Soomro</h2>
-                <p class="title">Full-stack Developer</p>
-                <p><a href="https://www.linkedin.com/" class="button">LinkedIn</a></p>
+                <header>
+                    <h2>Wasim Soomro</h2>
+                    <p class="title">Full-stack Developer</p>
+                </header>
+                <footer>
+                    <p><a href="https://www.linkedin.com/in/jennisung/" class="button primary" role="button">LinkedIn</a></p>
+                </footer>
             </div>
-        </div>
+        </article>
     </div>
 
 
     <div class="column">
-        <div class="card">
-            <img src="https://placehold.co/150x150" alt="Johnathon" style="width:100%">
+        <article class="card">
+            <img src="https://placehold.co/150x150" alt="jennifer" style="width:100%">
             <div class="container">
-                <h2>Jonathon Stillson</h2>
-                <p class="title">Full-stack Developer</p>
-                <p><a href="https://www.linkedin.com/" class="button">LinkedIn</a></p>
+                <header>
+                    <h2>Jonathon Stillson</h2>
+                    <p class="title">Full-stack Developer</p>
+                </header>
+                <footer>
+                    <p><a href="https://www.linkedin.com/in/jennisung/" class="button primary" role="button">LinkedIn</a></p>
+                </footer>
             </div>
-        </div>
+        </article>
     </div>
 </div>
+</main>
 
 </body>
 </html>

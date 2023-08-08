@@ -5,16 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7aa7b91b-18e7-4c61-bd47-601596f0c2fe" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/brewersproj/src/main/java/com/roomEase/brewersproj/controllers/ApplicationUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/brewersproj/src/main/java/com/roomEase/brewersproj/controllers/ApplicationUserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brewersproj/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/brewersproj/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brewersproj/src/main/java/com/roomEase/brewersproj/controllers/ChoreTrackerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/brewersproj/src/main/java/com/roomEase/brewersproj/controllers/ChoreTrackerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brewersproj/src/main/java/com/roomEase/brewersproj/models/ApplicationUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/brewersproj/src/main/java/com/roomEase/brewersproj/models/ApplicationUser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/brewersproj/src/main/resources/templates/aboutUs.html" beforeDir="false" afterPath="$PROJECT_DIR$/brewersproj/src/main/resources/templates/aboutUs.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brewersproj/src/main/resources/templates/choresTracker.html" beforeDir="false" afterPath="$PROJECT_DIR$/brewersproj/src/main/resources/templates/choresTracker.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/brewersproj/src/main/resources/templates/fragments/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/brewersproj/src/main/resources/templates/fragments/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brewersproj/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/brewersproj/src/main/resources/templates/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/brewersproj/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/brewersproj/src/main/resources/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brewersproj/src/main/resources/templates/myFlat.html" beforeDir="false" afterPath="$PROJECT_DIR$/brewersproj/src/main/resources/templates/myFlat.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brewersproj/src/main/resources/templates/myprofile.html" beforeDir="false" afterPath="$PROJECT_DIR$/brewersproj/src/main/resources/templates/myprofile.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/brewersproj/src/main/resources/templates/resolveConflict.html" beforeDir="false" afterPath="$PROJECT_DIR$/brewersproj/src/main/resources/templates/resolveConflict.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brewersproj/src/main/resources/templates/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/brewersproj/src/main/resources/templates/signup.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brewersproj/src/main/resources/templates/test.html" beforeDir="false" afterPath="$PROJECT_DIR$/brewersproj/src/main/resources/templates/test.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,7 +30,20 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Interface" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="show-all-by-household-id" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">

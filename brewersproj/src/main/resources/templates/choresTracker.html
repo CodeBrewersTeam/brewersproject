@@ -110,13 +110,15 @@
         }
 
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"/>
 </head>
-<body>
 <header>
-
+    <div th:replace="fragments/header :: nav"></div>
     <h1>Chore Tracker</h1>
 </header>
-<div class="container">
+<body>
+<main class="container">
     <h2>Chores for the Week:</h2>
 
 <!-- Button to trigger the modal
@@ -173,7 +175,7 @@ Modal
                 </select>
 
                 <label for="sundayDescription">Description:</label>
-                <input type="text" id="sundayDescription" name="description" required />
+                <input type="text" id="sundayDescription" name="description" required/>
                 <button type="submit">Add Chore for Sunday</button>
             </form>
 
@@ -208,7 +210,7 @@ Modal
                 </select>
 
                 <label for="mondayDescription">Description:</label>
-                <input type="text" id="mondayDescription" name="description" required />
+                <input type="text" id="mondayDescription" name="description" required/>
                 <button type="submit">Add Chore for Monday</button>
             </form>
 
@@ -238,7 +240,7 @@ Modal
                 </select>
 
                 <label for="tuesdayDescription">Description:</label>
-                <input type="text" id="tuesdayDescription" name="description" required />
+                <input type="text" id="tuesdayDescription" name="description" required/>
                 <button type="submit">Add Chore for Tuesday</button>
             </form>
 
@@ -268,7 +270,7 @@ Modal
                 </select>
 
                 <label for="wednesdayDescription">Description:</label>
-                <input type="text" id="wednesdayDescription" name="description" required />
+                <input type="text" id="wednesdayDescription" name="description" required/>
                 <button type="submit">Add Chore for Wednesday</button>
             </form>
 
@@ -298,7 +300,7 @@ Modal
                 </select>
 
                 <label for="thursdayDescription">Description:</label>
-                <input type="text" id="thursdayDescription" name="description" required />
+                <input type="text" id="thursdayDescription" name="description" required/>
                 <button type="submit">Add Chore for Thursday</button>
             </form>
 
@@ -327,7 +329,7 @@ Modal
                 </select>
 
                 <label for="fridayDescription">Description:</label>
-                <input type="text" id="fridayDescription" name="description" required />
+                <input type="text" id="fridayDescription" name="description" required/>
                 <button type="submit">Add Chore for Friday</button>
             </form>
 
@@ -356,7 +358,7 @@ Modal
                 </select>
 
                 <label for="saturdayDescription">Description:</label>
-                <input type="text" id="saturdayDescription" name="description" required />
+                <input type="text" id="saturdayDescription" name="description" required/>
                 <button type="submit">Add Chore for Saturday</button>
             </form>
 
@@ -375,19 +377,16 @@ Modal
         </div>
 
 
-
-
-
     </div>
 
     <h2>Things that need to get done the following week:</h2>
     <form action="/addChore" method="post">
         <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required />
+        <input type="text" id="name" name="name" required/>
         <label for="dueDate">Due Date:</label>
-        <input type="date" id="dueDate" name="dueDate" required />
+        <input type="date" id="dueDate" name="dueDate" required/>
         <label for="description">Description:</label>
-        <input type="text" id="description" name="description" required />
+        <input type="text" id="description" name="description" required/>
         <button type="submit">Add Chore</button>
     </form>
 
@@ -430,6 +429,7 @@ Modal
         </div>
     </div>
 
-</div>
+</main>
+
 </body>
 </html>

@@ -21,6 +21,9 @@ public class ApplicationUser implements UserDetails {
     String householdId;
     Boolean admin;
     Long telephone;
+//    @ManyToOne
+//    @JoinColumn(name = "household_id")
+//    public Household household;
 
 
 
@@ -45,8 +48,6 @@ public class ApplicationUser implements UserDetails {
     private List<Chore> chores;
 
 
-//    @OneToMany(mappedBy = "user")
-//    private List<PostUser> posts;
 
 
 
