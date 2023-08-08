@@ -8,10 +8,7 @@ import com.roomEase.brewersproj.repositories.ChoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -130,6 +127,20 @@ public class ChoreTrackerController {
     @PostMapping("/addSaturdayChore")
     public String saveSaturdayChores(@ModelAttribute ChoreForm choreForm) {
         return saveChoreForDay(choreForm, "Saturday");
+    }
+
+
+///future task to add future chore to current
+    @PostMapping("/moveToDayOfWeek/{choreId}")
+    public String moveToDayOfWeek(@PathVariable Long choreId, @RequestParam String dayOfWeek) {
+        Chore chore = choreRepository.findById(choreId).orElse(null);
+
+        if (chore != null) {
+            chore.setDayOfWeek(dayOfWeek);
+            choreRepository.save(chore);
+        }
+
+        return "redirect:/choresTracker";
     }
 
 }
