@@ -344,17 +344,46 @@
         <button type="submit">Add Chore</button>
     </form>
 
+
+<!--    <h2>Future Tasks:</h2>-->
+<!--    <div class="tasks">-->
+<!--        <div th:each="futureTask : ${futureTasks}" class="task">-->
+<!--            <h3 th:text="${futureTask.name}"></h3>-->
+<!--            <p th:text="${'Due Date: ' + futureTask.dueDate}"></p>-->
+<!--            <p th:text="${'Description: ' + futureTask.description}"></p>-->
+<!--            <form th:action="@{/deleteChore/__${futureTask.id}__}" method="get">-->
+<!--                <button type="submit">Delete</button>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+
     <h2>Future Tasks:</h2>
     <div class="tasks">
         <div th:each="futureTask : ${futureTasks}" class="task">
             <h3 th:text="${futureTask.name}"></h3>
             <p th:text="${'Due Date: ' + futureTask.dueDate}"></p>
             <p th:text="${'Description: ' + futureTask.description}"></p>
+
+            <form th:action="@{/moveToDayOfWeek/__${futureTask.id}__}" method="post">
+                <select name="dayOfWeek">
+                    <option value="Saturday">Saturday</option>
+                    <option value="Sunday">Sunday</option>
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                </select>
+                <button type="submit">Move to Selected Day</button>
+            </form>
+
             <form th:action="@{/deleteChore/__${futureTask.id}__}" method="get">
                 <button type="submit">Delete</button>
             </form>
         </div>
     </div>
+
 </main>
+
 </body>
 </html>
