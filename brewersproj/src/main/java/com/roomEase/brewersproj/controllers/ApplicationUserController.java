@@ -13,23 +13,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class ApplicationUserController {
 
-
     @Autowired
     ApplicationUserRepository applicationUserRepository;
-
 
     @Autowired
     PasswordEncoder passwordEncoder;
 
     @Autowired
     HttpServletRequest request;
-
-
-
 
     // Mapping for login page
     @GetMapping("/login")
@@ -48,8 +44,6 @@ public class ApplicationUserController {
     public String aboutUsPage() {
         return "aboutUs.html"; //
     }
-
-
 
 
 
@@ -102,6 +96,21 @@ public class ApplicationUserController {
         return "index.html";
     }
 
+
+    @GetMapping("/users")
+    public String getUsersByHouseholdId(Model m, Principal p) {
+        String currentUserUsername = p.getName();
+        ApplicationUser currentUser = applicationUserRepository.findByUsername(currentUserUsername);
+
+        if(currentUser != null) {
+        List<ApplicationUser> usersInSameHousehold = applicationUserRepository.findByHouseholdId(currentUser.getHouseholdId());
+        m.addAttribute("users", usersInSameHousehold);
+
+
+        }
+
+        return "myFlat.html";
+    }
 
 
 

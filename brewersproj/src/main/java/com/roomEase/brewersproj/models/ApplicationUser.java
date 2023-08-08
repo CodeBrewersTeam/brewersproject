@@ -25,6 +25,7 @@ public class ApplicationUser implements UserDetails {
 
 
     public ApplicationUser(Long id, String firstName, String lastName, String username, String password, String email, String householdId, Boolean admin, Long telephone) {
+
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -50,9 +51,7 @@ public class ApplicationUser implements UserDetails {
 
 
     public ApplicationUser() {
-
     }
-
 
     public Long getId() {
         return id;

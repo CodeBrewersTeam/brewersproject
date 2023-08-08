@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Conflict Resolution</title>
+  <!-- Add any necessary styles or scripts -->
+</head>
+<body>
+<header>
+  <div th:replace="fragments/header :: nav"></div>
+  <h1>Welcome, <span th:text="${username}">User</span>!</h1>
+  <nav>
+
+    <!-- Add navigation links if any -->
+  </nav>
+</header>
+
+<main>
+  <section>
+    <h2>Describe Your Conflict</h2>
+    <form action="/resolveConflict" method="post">
+      <textarea name="conflictDescription" rows="4" cols="50" required placeholder="Describe the conflict in detail..."></textarea>
+      <br/>
+      <button type="submit">Get Resolution</button>
+    </form>
+  </section>
+
+  <section th:if="${resolution != null}">
+    <h2>Suggested Resolution</h2>
+    <p th:text="${resolution}">The resolution will appear here.</p>
+  </section>
+</main>
+
+<footer>
+  <!-- Add footer if any -->
+</footer>
+</body>
+</html>
