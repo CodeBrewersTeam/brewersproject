@@ -5,12 +5,13 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class ApplicationUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-   Long id;
+    Long id;
 
     String firstName;
     String lastName;
@@ -18,12 +19,12 @@ public class ApplicationUser implements UserDetails {
     String password;
     String email;
     String householdId;
-    String role;
+    Boolean admin;
     Long telephone;
 
 
 
-    public ApplicationUser(Long id, String firstName, String lastName, String username, String password, String email, String householdId, String role, Long telephone) {
+    public ApplicationUser(Long id, String firstName, String lastName, String username, String password, String email, String householdId, Boolean admin, Long telephone) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -31,9 +32,22 @@ public class ApplicationUser implements UserDetails {
         this.password = password;
         this.email = email;
         this.householdId = householdId;
-        this.role = role;
+        this.admin = admin;
         this.telephone = telephone;
     }
+
+    //Each user can have multiple chores to do, and each chore can be assigned to multiple users.
+    @ManyToMany
+    @JoinTable(name = "user_chore",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "chore_id"))
+    private List<Chore> chores;
+
+
+//    @OneToMany(mappedBy = "user")
+//    private List<PostUser> posts;
+
+
 
     public ApplicationUser() {
 
@@ -85,12 +99,12 @@ public class ApplicationUser implements UserDetails {
         this.householdId = householdId;
     }
 
-    public String getRole() {
-        return role;
+    public Boolean getAdmin() {
+        return admin;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setAdmin(Boolean admin) {
+        this.admin = admin;
     }
 
     public Long getTelephone() {

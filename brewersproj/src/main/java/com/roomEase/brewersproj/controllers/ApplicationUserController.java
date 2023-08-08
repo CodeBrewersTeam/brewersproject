@@ -30,6 +30,7 @@ public class ApplicationUserController {
 
 
 
+
     // Mapping for login page
     @GetMapping("/login")
     public String getLoginPage() {
@@ -48,9 +49,13 @@ public class ApplicationUserController {
         return "aboutUs.html"; //
     }
 
+
+
+
+
     // Mapping for signup form submission
     @PostMapping("/signup")
-    public RedirectView postSignup(String firstName, String lastName, String username, String password, String email, String householdId, String role, Long telephone) {
+    public RedirectView postSignup(String firstName, String lastName, String username, String password, String email, String householdId, Boolean admin, Long telephone) {
         ApplicationUser user = new ApplicationUser();
         user.setFirstName(firstName);
         user.setLastName(lastName);
@@ -58,7 +63,7 @@ public class ApplicationUserController {
         user.setPassword(passwordEncoder.encode(password));
         user.setEmail(email);
         user.setHouseholdId(householdId);
-        user.setRole(role);
+        user.setAdmin(admin);
         user.setTelephone(telephone);
 
         applicationUserRepository.save(user);
@@ -100,9 +105,6 @@ public class ApplicationUserController {
 
 
 
-
-
-
     // EVERYTHING above is working. You should be able to login and go to myprofiles page and create account
 
 
@@ -117,8 +119,5 @@ public class ApplicationUserController {
         }
         return "myprofile";
     }
-
-
-
 
 }
