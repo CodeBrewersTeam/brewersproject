@@ -6,8 +6,10 @@
 </head>
 <body>
 <header>
+  <div th:replace="fragments/header :: nav"></div>
   <h1>Welcome, <span th:text="${username}">User</span>!</h1>
   <nav>
+
     <!-- Add navigation links if any -->
   </nav>
 </header>
