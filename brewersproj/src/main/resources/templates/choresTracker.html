@@ -1,122 +1,207 @@
-<!--<!DOCTYPE html>-->
-<!--<html>-->
-<!--<head>-->
-<!--    <title>Roommate Chore Chart</title>-->
-<!--    <link rel="stylesheet" href="/styles.css">-->
-<!--    <link rel="stylesheet" href="https://picocss.com/releases/latest/css/pico.min.css">-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chore Tracker</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.4;
+            color: #333;
+            font-size: 0.9em;
+        }
+
+        header h1 {
+            font-weight: 300;
+            letter-spacing: 2px;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .container {
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        .calendar .day {
+            border: none;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08);
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .task h3 {
+            font-size: 1em;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .task input[type="text"],
+        .task input[type="date"],
+        .container button,
+        .save-btn {
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            padding: 6px 10px;
+            font-size: 0.8em;
+        }
+
+        .container button, .save-btn {
+            background-color: #f8f8f8;
+            border: 1px solid #ccc;
+            color: #333;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+
+        .container button:hover, .save-btn:hover {
+            background-color: #e6e6e6;
+        }
+
+        .container label {
+            font-size: 0.8em;
+            font-weight: 400;
+            color: #555;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .task input[type="checkbox"] {
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+
+        .task label[for="completed"] {
+            display: inline;
+            font-size: 0.8em;
+        }
+
+        .tasks {
+            padding: 10px 0;
+        }
+
+        .day-Sunday {
+            background-color: #FFE5E5;
+        }
+
+        .day-Monday {
+            background-color: #E5E5FF;
+        }
+
+        .day-Tuesday {
+            background-color: #E5FFEC;
+        }
+
+        .day-Wednesday {
+            background-color: #FFFFE5;
+        }
+
+        .day-Thursday {
+            background-color: #F4E1FF;
+        }
+
+        .day-Friday {
+            background-color: #FFF3E5;
+        }
+
+        .day-Saturday {
+            background-color: #E5F7FF;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Chore Tracker</h1>
+</header>
+<div class="container">
 
 
-<!--<style>-->
 
-<!--    table {-->
-<!--        border-collapse: collapse;-->
-<!--        width: 100%;-->
-<!--    }-->
+    <h2 class="day-Sunday" >Sunday Tasks:</h2>
+    <div th:each="task : ${sundayTasks}">
+        <h3 th:text="${task.name}"></h3>
+    <form action="/addSundayChore" method="post">
+        <label for="name">Task Name:</label>
+        <input type="text" id="name" name="name" required />
+        <label for="dueDate">Due Date:</label>
+        <input type="date" id="dueDate" name="dueDate" required />
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" required />
 
+        <label for="users">Assign to:</label>
+        <select name="users" id="users" multiple>
+            <option th:each="user : ${roommates}" th:value="${user.id}" th:text="${user.username}"></option>
+        </select>
+        <button type="submit">Add Task</button>
+    </div>
 
-<!--    th, td {-->
-<!--        border: 1px solid #ccc;-->
-<!--        padding: 16px;-->
-<!--        text-align: center;-->
-<!--    }-->
+    </form>
 
-
-<!--    th {-->
-<!--        background-color: #f0f0f0;-->
-<!--    }-->
-
-<!--</style>-->
-<!--</head>-->
-<!--<body>-->
-<!--<h1 class="text-center">Roommate Chore Chart</h1>-->
-<!--<div class="table-responsive">-->
-
-<!--    <table>-->
-<!--        <tr>-->
-<!--            <th>Roommate / Day</th>-->
-<!--            <th>Sun</th>-->
-<!--            <th>Mon</th>-->
-<!--            <th>Tue</th>-->
-<!--            <th>Wed</th>-->
-<!--            <th>Thu</th>-->
-<!--            <th>Fri</th>-->
-<!--            <th>Sat</th>-->
-<!--        </tr>-->
-
-<!--        <tr>-->
-<!--            <td>-->
-<!--                <button onclick="editRoommate('roommate-1')">Edit</button>-->
-<!--            </td>-->
-<!--            <td id="roommate-1-0">Chore 1</td>-->
-<!--            <td id="roommate-1-1">Chore 2</td>-->
-<!--            <td id="roommate-1-2">Chore 3</td>-->
-<!--            <td id="roommate-1-3">Chore 4</td>-->
-<!--            <td id="roommate-1-4">Chore 5</td>-->
-<!--            <td id="roommate-1-5">Chore 6</td>-->
-<!--            <td id="roommate-1-6">Chore 7</td>-->
-<!--        </tr>-->
+    <form action="/choresTrackersunday" method="post">
+        <div class="calendar">
+            <div class="day-Sunday">
+                <h2>Sunday</h2>
+                <div class="tasks">
+                    <div th:each="chore : ${chores}" class="task">
+                        <h3 th:text="${chore.name}"></h3>
+                        <input type="checkbox" th:checked="${taskAssignments['Sunday'][chore.id]}" th:field="*{taskAssignments['Sunday'][chore.id]}"/>
+                        <label for="completed">Completed</label>
+                        <input type="text" th:field="*{taskDescriptions[chore.id]}" placeholder="Task description"/>
+                        <input type="text" th:field="*{usersAssignments['Sunday'][chore.id]}" placeholder="Assign users (comma-separated)"/>
+                        <label th:text="${usersAssignments['Sunday'][chore.id] != null ? 'Assigned to: ' + usersAssignments['Sunday'][chore.id] : 'Not Assigned'}"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="save-btn">Save Chores</button>
+    </form>
 
 
-<!--        <tr>-->
-<!--            <td>-->
-<!--                <button onclick="editRoommate('roommate-2')">Edit</button>-->
-<!--            </td>-->
-<!--            <td id="roommate-2-0">Chore 1</td>-->
-<!--            <td id="roommate-2-1">Chore 2</td>-->
-<!--            <td id="roommate-2-2">Chore 3</td>-->
-<!--            <td id="roommate-2-3">Chore 4</td>-->
-<!--            <td id="roommate-2-4">Chore 5</td>-->
-<!--            <td id="roommate-2-5">Chore 6</td>-->
-<!--            <td id="roommate-2-6">Chore 7</td>-->
-<!--        </tr>-->
+    <form action="/choresTrackermonday" method="post">
+        <div class="calendar">
+            <div class="day day-Monday">
+                <h2>Monday</h2>
+                <div class="tasks">
+                    <div th:each="chore : ${chores}" class="task">
+                        <h3 th:text="${chore.name}"></h3>
+                        <input type="checkbox" th:checked="${taskAssignments['monday'][chore.id]}" th:field="*{taskAssignments['monday'][chore.id]}"/>
+                        <label for="completed">Completed</label>
+                        <input type="text" th:field="*{taskDescriptions[chore.id]}" placeholder="Task description"/>
+                        <input type="text" th:field="*{usersAssignments['monday'][chore.id]}" placeholder="Assign users (comma-separated)"/>
+                        <label th:text="${usersAssignments['monday'][chore.id] != null ? 'Assigned to: ' + usersAssignments['monday'][chore.id] : 'Not Assigned'}"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="save-btn">Save Chores</button>
+    </form>
 
 
-<!--        <tr>-->
-<!--            <td>-->
-<!--                <button onclick="editRoommate('roommate-3')">Edit</button>-->
-<!--            </td>-->
-<!--            <td id="roommate-3-0">Chore 1</td>-->
-<!--            <td id="roommate-3-1">Chore 2</td>-->
-<!--            <td id="roommate-3-2">Chore 3</td>-->
-<!--            <td id="roommate-3-3">Chore 4</td>-->
-<!--            <td id="roommate-3-4">Chore 5</td>-->
-<!--            <td id="roommate-3-5">Chore 6</td>-->
-<!--            <td id="roommate-3-6">Chore 7</td>-->
-<!--        </tr>-->
 
+    <h2>Things that need to get done the following week:</h2>
+    <form action="/addChore" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required />
+        <label for="dueDate">Due Date:</label>
+        <input type="date" id="dueDate" name="dueDate" required />
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" required />
+        <button type="submit">Add Chore</button>
+    </form>
 
-<!--        <tr>-->
-<!--            <td>-->
-<!--                <button onclick="editRoommate('roommate-4')">Edit</button>-->
-<!--            </td>-->
-<!--            <td id="roommate-4-0">Chore 1</td>-->
-<!--            <td id="roommate-4-1">Chore 2</td>-->
-<!--            <td id="roommate-4-2">Chore 3</td>-->
-<!--            <td id="roommate-4-3">Chore 4</td>-->
-<!--            <td id="roommate-4-4">Chore 5</td>-->
-<!--            <td id="roommate-4-5">Chore 6</td>-->
-<!--            <td id="roommate-4-6">Chore 7</td>-->
-<!--        </tr>-->
-
-
-<!--        <tr>-->
-<!--            <td>-->
-<!--                <button onclick="editRoommate('roommate-5')">Edit</button>-->
-<!--            </td>-->
-<!--            <td id="roommate-5-0">Chore 1</td>-->
-<!--            <td id="roommate-5-1">Chore 2</td>-->
-<!--            <td id="roommate-5-2">Chore 3</td>-->
-<!--            <td id="roommate-5-3">Chore 4</td>-->
-<!--            <td id="roommate-5-4">Chore 5</td>-->
-<!--            <td id="roommate-5-5">Chore 6</td>-->
-<!--            <td id="roommate-5-6">Chore 7</td>-->
-<!--        </tr>-->
-
-
-<!--    </table>-->
-<!--</div>-->
-<!--</body>-->
-<!--</html>-->
-
-
+    <h2>Future Tasks:</h2>
+    <div class="tasks">
+        <div th:each="futureTask : ${futureTasks}" class="task">
+            <h3 th:text="${futureTask.name}"></h3>
+            <p th:text="${'Due Date: ' + futureTask.dueDate}"></p>
+            <p th:text="${'Description: ' + futureTask.description}"></p>
+            <form th:action="@{/deleteChore/__${futureTask.id}__}" method="get">
+                <button type="submit">Delete</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
 
