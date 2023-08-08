@@ -17,6 +17,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 
@@ -29,37 +30,53 @@ public class ChoreTrackerController {
     @Autowired
     private ApplicationUserRepository userRepository;
 
-//    @Autowired
-//    private ChoreRepository choreRepository;
 
 
     @GetMapping("/choresTracker")
     public String getChoresTrackerPage(Model model) {
-        List<ApplicationUser> users = userRepository.findAll();
-
-        List<String> roommates = users.stream()
+        List<ApplicationUser> allUsers = userRepository.findAll();
+        List<String> roommates = allUsers.stream()
                 .map(ApplicationUser::getUsername)
                 .collect(Collectors.toList());
-
         List<Chore> chores = choreRepository.findAll();
         LocalDate currentDate = LocalDate.now();
         List<Chore> futureTasks = choreRepository.findAllByDueDateAfter(currentDate);
-
         Date currentDateAsDate = Date.from(currentDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
 
-        ChoreForm choreForm = new ChoreForm();
-        choreForm.setRoommates(roommates);
-        choreForm.setChores(chores);
-
-        model.addAttribute("choreForm", choreForm);
+        model.addAttribute("choreForm", new ChoreForm(roommates, chores));
         model.addAttribute("futureTasks", futureTasks);
+        model.addAttribute("allUsers", allUsers);
+
+        String[] days = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+        for (String day : days) {
+            List<Chore> dayChores = choreRepository.findAllByDayOfWeek(day);
+            model.addAttribute(day.toLowerCase() + "Chores", dayChores);
+        }
 
         return "choresTracker.html";
     }
 
 
-//    Directed back to the chore tracker page after saving form
-        @PostMapping("/addChore")
+    private String saveChoreForDay(ChoreForm choreForm, String day) {
+        Chore chore = new Chore();
+        chore.setName(choreForm.getName());
+        chore.setDescription(choreForm.getDescription());
+        chore.setDayOfWeek(day);
+
+        ApplicationUser user = userRepository.findById(choreForm.getUserId()).orElse(null);
+
+        if(user != null) {
+            chore.setAssignedUsers(Set.of(user));
+        } else {
+            return "redirect:/choresTracker?error=userNotFound";
+        }
+
+        choreRepository.save(chore);
+        return "redirect:/choresTracker";
+    }
+
+
+    @PostMapping("/addChore")
         public String addChore(@ModelAttribute Chore chore) {
             choreRepository.save(chore);
             return "redirect:/choresTracker";
@@ -80,28 +97,81 @@ public class ChoreTrackerController {
         }
 
 
+    @PostMapping("/addSundayChore")
+    public String saveSundayChores(@ModelAttribute ChoreForm choreForm) {
+        return saveChoreForDay(choreForm, "Sunday");
+    }
+
+    @PostMapping("/addMondayChore")
+    public String saveMondayChores(@ModelAttribute ChoreForm choreForm) {
+        return saveChoreForDay(choreForm, "Monday");
+    }
+
+    @PostMapping("/addTuesdayChore")
+    public String saveTuesdayChores(@ModelAttribute ChoreForm choreForm) {
+        return saveChoreForDay(choreForm, "Tuesday");
+    }
+
+    @PostMapping("/addWednesdayChore")
+    public String saveWednesdayChores(@ModelAttribute ChoreForm choreForm) {
+        return saveChoreForDay(choreForm, "Wednesday");
+    }
+
+    @PostMapping("/addThursdayChore")
+    public String saveThursdayChores(@ModelAttribute ChoreForm choreForm) {
+        return saveChoreForDay(choreForm, "Thursday");
+    }
+
+    @PostMapping("/addFridayChore")
+    public String saveFridayChores(@ModelAttribute ChoreForm choreForm) {
+        return saveChoreForDay(choreForm, "Friday");
+    }
+
+    @PostMapping("/addSaturdayChore")
+    public String saveSaturdayChores(@ModelAttribute ChoreForm choreForm) {
+        return saveChoreForDay(choreForm, "Saturday");
+    }
+
+}
 
 
-        /////above is for "Things that need to get done the following week:" and "future task" and mapping
 
-//    @GetMapping("/choresTracker")
-//    public String getAllChores(Model model) {
-//        model.addAttribute("chores", choreRepository.findAll());
-//        return "choresTracker";
-//    }
 
 //    @PostMapping("/addSundayChore")
 //    public String saveSundayChores(@ModelAttribute ChoreForm choreForm) {
-//        // Set the day
 //        Chore chore = new Chore();
 //        chore.setName(choreForm.getName());
 //        chore.setDescription(choreForm.getDescription());
-//        chore.setDueDate(choreForm.getDueDate());
 //        chore.setDayOfWeek("Sunday");
 //
-//        // Find and set the assigned users
 //        Set<ApplicationUser> users = userRepository.findAllByIdIn(choreForm.getUsersAssignments().keySet());
 //        chore.setAssignedUsers(users);
+//
+//        choreRepository.save(chore);
+//
+//
+//
+//        return "redirect:/choresTracker";
+//    }
+
+
+
+
+//    @PostMapping("/addSundayChore")
+//    public String saveSundayChores(@ModelAttribute ChoreForm choreForm) {
+//        Chore chore = new Chore();
+//        chore.setName(choreForm.getName());
+//        chore.setDescription(choreForm.getDescription());
+//        chore.setDayOfWeek("Sunday");
+//
+//        // Fetch user based on submitted userId
+//        ApplicationUser user = userRepository.findById(choreForm.getUserId()).orElse(null);
+//
+//        if(user != null) {
+//            chore.setAssignedUsers(Set.of(user));
+//        } else {
+//            return "redirect:/choresTracker?error=userNotFound";
+//        }
 //
 //        choreRepository.save(chore);
 //
@@ -109,16 +179,32 @@ public class ChoreTrackerController {
 //    }
 
 
-//    @PostMapping("/addMondayChore")
-//    public String saveMondayChores(ChoreForm choreForm) {
-//        choreForm.setDay("Monday");
-//        return "redirect:/choresTracker";
+
+//    @GetMapping("/choresTracker")
+//    public String getChoresTrackerPage(Model model) {
+//        List<ApplicationUser> allUsers = userRepository.findAll();  // Fetch all users
+//
+//        List<String> roommates = allUsers.stream()
+//                .map(ApplicationUser::getUsername)
+//                .collect(Collectors.toList());
+//
+//        List<Chore> chores = choreRepository.findAll();
+//        LocalDate currentDate = LocalDate.now();
+//        List<Chore> futureTasks = choreRepository.findAllByDueDateAfter(currentDate);
+//
+//        Date currentDateAsDate = Date.from(currentDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+//
+//        // Fetch Sunday chores
+//        List<Chore> sundayChores = choreRepository.findAllByDayOfWeek("Sunday");
+//
+//        ChoreForm choreForm = new ChoreForm();
+//        choreForm.setRoommates(roommates);
+//        choreForm.setChores(chores);
+//
+//        model.addAttribute("choreForm", choreForm);
+//        model.addAttribute("futureTasks", futureTasks);
+//        model.addAttribute("sundayChores", sundayChores);
+//        model.addAttribute("allUsers", allUsers);  // Add all users to your model
+//
+//        return "choresTracker.html";
 //    }
-
-
-    }
-
-
-
-
-
