@@ -33,9 +33,9 @@ public class ApplicationUser implements UserDetails {
     private List<Chore> chores;
 
 
+    public ApplicationUser(Long id, String firstName, String lastName, String username, String password, String email, String householdId, Boolean admin, Long telephone) {
 
-    public ApplicationUser(Long id, String firstName, String lastName, String username, String password, String email, Boolean roles, Long telephone) {
-
+//     public ApplicationUser(Long id, String firstName, String lastName, String username, String password, String email, Boolean roles, Long telephone) {
 
         this.id = id;
         this.firstName = firstName;

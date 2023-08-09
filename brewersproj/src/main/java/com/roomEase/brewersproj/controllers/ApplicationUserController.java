@@ -111,8 +111,13 @@ public class ApplicationUserController {
         String currentUserUsername = p.getName();
         ApplicationUser currentUser = applicationUserRepository.findByUsername(currentUserUsername);
 
-        if (currentUser != null) {
-            Household household = currentUser.getHousehold();
+
+        if(currentUser != null) {
+            List<ApplicationUser> usersInSameHousehold = applicationUserRepository.findByHouseholdId(currentUser.getHouseholdId());
+            m.addAttribute("users", usersInSameHousehold);
+
+//         if (currentUser != null) {
+//             Household household = currentUser.getHousehold();
 
             // Check if household is not null
             if (household != null) {
@@ -124,14 +129,25 @@ public class ApplicationUserController {
         return "myFlat.html";
     }
 
-    @GetMapping("/users/{id}")
-    public String getUserInfo(Model model, Principal p, @PathVariable Long id){
-        ApplicationUser foundUser = applicationUserRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("User not found with ID: " + id));
-        model.addAttribute("foundUser", foundUser);
 
-        return "users.html";
-    }
+
+
+    //handling user's profile
+
+//    @GetMapping("/users/{id}")
+//    public String getUserInfo(Model model, Principal p, @PathVariable Long id){
+//        ApplicationUser foundUser = applicationUserRepository.findById(id)
+//                .orElseThrow(() -> new NoSuchElementException("User not found with ID: " + id));
+//        model.addAttribute("foundUser", foundUser);
+//
+//        return "myFlat.html";
+//    }
+
+
+
+
+
+
 
     // EVERYTHING above is working. You should be able to login and go to myprofiles page and create account
 
@@ -162,6 +178,47 @@ public class ApplicationUserController {
             applicationUserRepository.save(currentUser);
         }
         return new RedirectView("/myprofile");
+    }
+
+
+
+    //acccounts' application page
+
+    @GetMapping("/users/{id}")
+    public String getUserInfo(Model m, Principal p, @PathVariable Long id) {
+        if (p != null) {
+            String username = p.getName();
+            ApplicationUser applicationUser = applicationUserRepository.findByUsername(username);
+
+            m.addAttribute("BrowsingUserUsername", username);
+            m.addAttribute("BrowsingLastName", applicationUser.getLastName());
+            m.addAttribute("BrowsingFirstName", applicationUser.getFirstName());
+            m.addAttribute("applicationUserEmail", applicationUser.getEmail());
+            m.addAttribute("applicationUserTelephone", applicationUser.getTelephone());
+        }
+        ApplicationUser applicationUser = applicationUserRepository.findById(id).orElseThrow();
+        m.addAttribute("applicationUserUsername", applicationUser.getUsername());
+        m.addAttribute("applicationUserFirstName", applicationUser.getFirstName());
+        m.addAttribute("applicationUserLastName", applicationUser.getLastName());
+        m.addAttribute("applicationUserEmail", applicationUser.getEmail());
+        m.addAttribute("applicationUserTelephone", applicationUser.getTelephone());
+
+
+        return "/user-info.html";
+    }
+
+    @PutMapping("/users/{id}")
+    public RedirectView editUserInfo(Principal p, @PathVariable Long id, String username, String firstName, String lastName, String email, Long telephone) {
+        if (p != null) {
+            ApplicationUser applicationUser = applicationUserRepository.findById(id).orElseThrow();
+            applicationUser.setUsername(username);
+            applicationUser.setFirstName(firstName);
+            applicationUser.setLastName(lastName);
+            applicationUser.setEmail(email);
+            applicationUser.setTelephone(telephone);
+            applicationUserRepository.save(applicationUser);
+        }
+        return new RedirectView("/users/" + id);
     }
 
 }
