@@ -95,8 +95,10 @@
 <!--</header>-->
 <body>
 <main class="container">
-    <h2>Chores Tracker for the week of  <span th:text="${startOfWeek}"></span> to <span th:text="${endOfWeek}"></span></h2>
-    <h5>Current Time: <span th:text="${currentTime}"></span></h5>
+
+
+    <h2>Chores Tracker for the week of  <span th:text="${startOfWeek}" style="color: #4B9CD3;"></span> to <span th:text="${endOfWeek}" style="color: #4B9CD3;"></span></h2>
+    <h5>Current Time: <span th:text="${currentTime}" style="color: #4B9CD3;"></span></h5>
 
     <div class="calendar">
 
@@ -417,7 +419,10 @@
 
             <form th:action="@{/moveToDayOfWeek/__${futureTask.id}__}" method="post">
                 <select name="dayOfWeek">
+<<<<<<< HEAD
+=======
 <!--                    <option value="Saturday">Saturday</option>-->
+>>>>>>> 3a77292f5a1a4827783f56c4d0d93bb9e21a7733
                     <option value="Sunday">Sunday</option>
                     <option value="Monday">Monday</option>
                     <option value="Tuesday">Tuesday</option>
