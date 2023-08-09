@@ -18,7 +18,10 @@ public class Chore {
     private boolean isCompleted;
     private String task;
     private String description;
-//    private String dayOfWeek;
+    //    private String dayOfWeek;
+    @ManyToOne
+    @JoinColumn(name = "household_id")
+    private Household household;
 
     public Chore() {
     }
@@ -34,7 +37,7 @@ public class Chore {
 
 
     //maybe this is issue?
-    @Column(name="day_of_week")
+    @Column(name = "day_of_week")
     private String dayOfWeek;
 
 

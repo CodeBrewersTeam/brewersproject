@@ -60,6 +60,7 @@ public class ChoreTrackerController {
 //    }
 
 
+
         @GetMapping("/choresTracker")
         public String getChoresTrackerPage(Model model, Principal principal) {
             LocalDate currentDate = LocalDate.now();
@@ -80,7 +81,10 @@ public class ChoreTrackerController {
                 return "errorPage.html";
             }
 
-            List<ApplicationUser> usersInSameHousehold = userRepository.findByHouseholdId(currentUser.getHouseholdId());
+
+
+            List<ApplicationUser> usersInSameHousehold = userRepository.findByHousehold_Id(currentUser.getHouseholdId());
+
             List<String> roommates = usersInSameHousehold.stream()
                     .map(ApplicationUser::getUsername)
                     .collect(Collectors.toList());
@@ -96,6 +100,7 @@ public class ChoreTrackerController {
                 model.addAttribute(day.toLowerCase() + "Chores", dayChores);
             }
             return "choresTracker.html";
+
         }
 
 
