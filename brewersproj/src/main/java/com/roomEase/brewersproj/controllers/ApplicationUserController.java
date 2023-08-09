@@ -42,7 +42,6 @@ public class ApplicationUserController {
         return "signup.html";
     }
 
-
     @GetMapping("/aboutUs")
     public String aboutUsPage() {
         return "aboutUs.html"; //
@@ -102,10 +101,6 @@ public class ApplicationUserController {
         return "index.html";
     }
 
-
-
-
-
     // myflatmates page
 
     @GetMapping("/users")
@@ -118,10 +113,8 @@ public class ApplicationUserController {
         m.addAttribute("users", usersInSameHousehold);
 
         }
-
         return "myFlat.html";
     }
-
 
     @GetMapping("/users/{id}")
     public String getUserInfo(Model model, Principal p, @PathVariable Long id){
@@ -132,21 +125,7 @@ public class ApplicationUserController {
         return "users.html";
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     // EVERYTHING above is working. You should be able to login and go to myprofiles page and create account
-
 
     // Mapping for user's profile page
     @GetMapping("/myprofile")
@@ -158,6 +137,23 @@ public class ApplicationUserController {
             model.addAttribute("username", username);
         }
         return "myprofile";
+    }
+
+    //Updating User Profile
+    @PostMapping("/myprofile/update")
+    public RedirectView updateUserProfile(Principal principal, String firstName, String lastName, String email, Long telephone) {
+        if (principal != null) {
+            String username = principal.getName();
+            ApplicationUser currentUser = applicationUserRepository.findByUsername(username);
+
+            currentUser.setFirstName(firstName);
+            currentUser.setLastName(lastName);
+            currentUser.setEmail(email);
+            currentUser.setTelephone(telephone);
+
+            applicationUserRepository.save(currentUser);
+        }
+        return new RedirectView("/myprofile");
     }
 
 }
