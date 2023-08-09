@@ -1,8 +1,10 @@
 package com.roomEase.brewersproj.controllers;
 import com.roomEase.brewersproj.models.ApplicationUser;
+import com.roomEase.brewersproj.models.Household;
 import com.roomEase.brewersproj.repositories.ApplicationUserRepository;
 
 
+import com.roomEase.brewersproj.repositories.HouseholdRepository;
 import org.springframework.ui.Model;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,6 +26,8 @@ public class ApplicationUserController {
     @Autowired
     ApplicationUserRepository applicationUserRepository;
 
+    @Autowired
+    private HouseholdRepository householdRepository;
     @Autowired
     PasswordEncoder passwordEncoder;
 
@@ -54,15 +58,14 @@ public class ApplicationUserController {
 
     // Mapping for signup form submission
     @PostMapping("/signup")
-    public RedirectView postSignup(String firstName, String lastName, String username, String password, String email, String householdId, Boolean admin, Long telephone) {
+    public RedirectView postSignup(String firstName, String lastName, String username, String password, String email, Boolean role, Long telephone) {
         ApplicationUser user = new ApplicationUser();
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setUsername(username);
         user.setPassword(passwordEncoder.encode(password));
         user.setEmail(email);
-        user.setHouseholdId(householdId);
-        user.setAdmin(admin);
+        user.setAdmin(role);
         user.setTelephone(telephone);
 
         applicationUserRepository.save(user);
@@ -108,10 +111,15 @@ public class ApplicationUserController {
         String currentUserUsername = p.getName();
         ApplicationUser currentUser = applicationUserRepository.findByUsername(currentUserUsername);
 
-        if(currentUser != null) {
-        List<ApplicationUser> usersInSameHousehold = applicationUserRepository.findByHouseholdId(currentUser.getHouseholdId());
-        m.addAttribute("users", usersInSameHousehold);
+        if (currentUser != null) {
+            Household household = currentUser.getHousehold();
 
+            // Check if household is not null
+            if (household != null) {
+                Long householdId = household.getId(); // Obtain the ID from the household object
+                List<ApplicationUser> usersInSameHousehold = applicationUserRepository.findByHousehold_Id(householdId);
+                m.addAttribute("users", usersInSameHousehold);
+            }
         }
         return "myFlat.html";
     }

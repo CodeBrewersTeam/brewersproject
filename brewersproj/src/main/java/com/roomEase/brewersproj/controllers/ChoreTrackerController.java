@@ -60,6 +60,7 @@ public class ChoreTrackerController {
 //    }
 
 
+
         @GetMapping("/choresTracker")
         public String getChoresTrackerPage(Model model, Principal principal) {
             LocalDate currentDate = LocalDate.now();
@@ -95,6 +96,7 @@ public class ChoreTrackerController {
                 model.addAttribute(day.toLowerCase() + "Chores", dayChores);
             }
             return "choresTracker.html";
+
         }
 
 
