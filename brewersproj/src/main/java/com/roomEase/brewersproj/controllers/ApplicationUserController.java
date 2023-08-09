@@ -123,14 +123,16 @@ public class ApplicationUserController {
     }
 
 
-    @GetMapping("/users/{id}")
-    public String getUserInfo(Model model, Principal p, @PathVariable Long id){
-        ApplicationUser foundUser = applicationUserRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("User not found with ID: " + id));
-        model.addAttribute("foundUser", foundUser);
 
-        return "users.html";
-    }
+// NOT working need to fix
+//    @GetMapping("/users/{id}")
+//    public String getUserInfo(Model model, Principal p, @PathVariable Long id){
+//        ApplicationUser foundUser = applicationUserRepository.findById(id)
+//                .orElseThrow(() -> new NoSuchElementException("User not found with ID: " + id));
+//        model.addAttribute("foundUser", foundUser);
+//
+//        return "users.html";
+//    }
 
 
 

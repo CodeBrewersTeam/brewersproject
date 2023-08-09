@@ -76,13 +76,34 @@
         <h1>Welcome to My Profile</h1>
 
         <article class="profile-details">
-
-
-
             <header>
                 <img
                     src="https://images.unsplash.com/photo-1425082661705-1834bfd09dca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2076&q=80"
                     alt="Profile Picture" class="profile-pic">
+
+
+
+
+
+<!--                change avatar feature(?)-->
+                <div id="changeAvatarModal" class="modal">
+                    <form action="/profile/change-avatar" method="post">
+                        <ul>
+                            <li th:each="avatar : ${avatars}">
+                                <label>
+                                    <input type="radio" name="selectedAvatarId" th:value="${avatar.id}">
+                                    <img
+                                            src="https://images.unsplash.com/photo-1425082661705-1834bfd09dca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2076&q=80" alt="Profile Picture" class="profile-pic">
+
+                                </label>
+                            </li>
+                        </ul>
+                        <button type="submit">Select Avatar</button>
+                    </form>
+                </div>
+
+
+
 
 
             </header>
@@ -92,11 +113,6 @@
             <p><span class="label">Email:</span> [[${currentUser.email}]]</p>
 
 
-
-
-
-
-
         </article>
 
 
@@ -104,6 +120,16 @@
     </div>
 
 </main>
+
+
+<script>
+    const changeAvatarButton = document.getElementById('changeAvatarButton');
+    const changeAvatarModal = document.getElementById('changeAvatarModal');
+
+    changeAvatarButton.addEventListener('click', () => {
+        changeAvatarModal.style.display = 'block';
+    });
+</script>
 
 </body>
 </html>
