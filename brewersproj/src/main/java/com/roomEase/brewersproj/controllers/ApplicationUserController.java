@@ -10,10 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.servlet.view.RedirectView;
 import java.security.Principal;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Controller
 public class ApplicationUserController {
@@ -100,6 +103,11 @@ public class ApplicationUserController {
     }
 
 
+
+
+
+    // myflatmates page
+
     @GetMapping("/users")
     public String getUsersByHouseholdId(Model m, Principal p) {
         String currentUserUsername = p.getName();
@@ -113,6 +121,27 @@ public class ApplicationUserController {
 
         return "myFlat.html";
     }
+
+
+    @GetMapping("/users/{id}")
+    public String getUserInfo(Model model, Principal p, @PathVariable Long id){
+        ApplicationUser foundUser = applicationUserRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("User not found with ID: " + id));
+        model.addAttribute("foundUser", foundUser);
+
+        return "users.html";
+    }
+
+
+
+
+
+
+
+
+
+
+
 
 
 

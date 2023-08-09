@@ -1,63 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chore Tracker</title>
+
+
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.4;
-            color: #333;
-            font-size: 0.9em;
-        }
-
-        header h1 {
-            font-weight: 300;
-            letter-spacing: 2px;
-            font-size: 1.5em;
-            margin-bottom: 15px;
-        }
-
-        .container {
-            border-radius: 10px;
-            padding: 15px;
-        }
-
-        .calendar .day {
-            border: none;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08);
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-
-        .task h3 {
-            font-size: 1em;
-            font-weight: 500;
-            margin-bottom: 10px;
-        }
-
-        .task input[type="text"],
-        .task input[type="date"],
-        .container button,
-        .save-btn {
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            padding: 6px 10px;
-            font-size: 0.8em;
-        }
-
-        .container button, .save-btn {
-            background-color: #f8f8f8;
-            border: 1px solid #ccc;
-            color: #333;
-            transition: background-color 0.3s;
-            margin-top: 10px;
-        }
-
-        .container button:hover, .save-btn:hover {
-            background-color: #e6e6e6;
-        }
 
         .container label {
             font-size: 0.8em;
@@ -67,18 +16,19 @@
             margin-bottom: 5px;
         }
 
-        .task input[type="checkbox"] {
-            margin-right: 5px;
-            vertical-align: middle;
+
+        .secondary {
+            background-color: transparent;
+            color: #333;
+            border: 1px solid #ccc;
+            transition: background-color 0.3s, color 0.3s;
+            cursor: pointer;
+            text-decoration: none;
         }
 
-        .task label[for="completed"] {
-            display: inline;
-            font-size: 0.8em;
-        }
-
-        .tasks {
-            padding: 10px 0;
+        .secondary:hover {
+            background-color: #f8f8f8;
+            color: #555;
         }
 
         .day-Sunday {
@@ -109,53 +59,120 @@
             background-color: #E5F7FF;
         }
 
+
+
     </style>
+
+    <script>
+        function openModal(modalId) {
+            var modal = document.getElementById(modalId);
+            modal.style.display = "block";
+        }
+
+        function closeModal(modalId) {
+            var modal = document.getElementById(modalId);
+            modal.style.display = "none";
+        }
+    </script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"/>
+
+    <script>
+        function toggleModal(event) {
+            event.preventDefault();
+            var modal = document.getElementById(event.currentTarget.getAttribute("data-target"));
+            modal.toggleAttribute("open");
+        }
+    </script>
+
 </head>
-<header>
+<!--<header>-->
+    <main class="container">
     <div th:replace="fragments/header :: nav"></div>
-    <h1>Chore Tracker</h1>
-</header>
+
+    </main>
+<!--</header>-->
 <body>
 <main class="container">
-    <h2>Chores for the Week:</h2>
+    <h2>Chores Tracker for the week of  <span th:text="${startOfWeek}"></span> to <span th:text="${endOfWeek}"></span></h2>
+    <h5>Current Time: <span th:text="${currentTime}"></span></h5>
 
     <div class="calendar">
+
+
+
         <!-- Sunday -->
         <div class="day day-Sunday">
             <h3>Sunday</h3>
-            <form action="/addSundayChore" method="post">
-                <label for="sundayUser">Roommate:</label>
-                <select id="sundayUser" name="userId" required>
-                    <option value="" disabled selected>Select a Roommate</option>
-                    <option th:each="user : ${allUsers}" th:value="${user.id}" th:text="${user.username}"></option>
-                </select>
-
-                <label for="sundayDescription">Description:</label>
-                <input type="text" id="sundayDescription" name="description" required/>
-                <button type="submit">Add Chore for Sunday</button>
-            </form>
-
+            <button class="open-modal-button contrast" data-target="SundayModal" onClick="toggleModal(event)">
+                Add Chore for Sunday
+            </button>
 
             <div th:each="sundayChore : ${sundayChores}" class="chore">
                 <h4 th:text="${sundayChore.name}"></h4>
                 <p>Assigned Roommate:
                     <span th:each="user : ${sundayChore.assignedUsers}">
-                <span th:text="${user.username} + ' '"></span>
-            </span>
+                        <span th:text="${user.username} + ' '"></span>
+                    </span>
                 </p>
                 <p th:text="${'Description: ' + sundayChore.description}"></p>
-
                 <form th:action="@{'/deleteChore/' + ${sundayChore.id}}" method="get" style="display:inline;">
                     <button type="submit">Delete</button>
                 </form>
             </div>
         </div>
 
-        <!-- Monday -->
-        <div class="day day-Monday">
-            <h3>Monday</h3>
+
+        <dialog id="SundayModal">
+            <article>
+                <a href="#close" aria-label="Close" class="close" data-target="SundayModal" onClick="toggleModal(event)"></a>
+                <h3>Add Chore for Sunday</h3>
+                <form action="/addSundayChore" method="post">
+                    <label for="sundayUser">Roommate:</label>
+                    <select id="sundayUser" name="userId" required>
+                        <option value="" disabled selected>Select a Roommate</option>
+                        <option th:each="user : ${allUsers}" th:value="${user.id}" th:text="${user.username}"></option>
+                    </select>
+
+                    <label for="sundayDescription">Description:</label>
+                    <input type="text" id="sundayDescription" name="description" required/>
+                    <button type="submit">Add Chore</button>
+                </form>
+                <button class="close-modal-button secondary" data-target="SundayModal" onClick="toggleModal(event)">Close</button>
+            </article>
+        </dialog>
+
+
+
+<!--something is making sunday merge with others, this div somewhat fixed this, still isues-->
+    </div>
+
+    <!-- Monday -->
+    <div class="day day-Monday">
+        <h3>Monday</h3>
+        <button class="open-modal-button contrast" data-target="MondayModal" onClick="toggleModal(event)">
+            Add Chore for Monday
+        </button>
+
+        <div th:each="mondayChore : ${mondayChores}" class="chore">
+            <h4 th:text="${mondayChore.name}"></h4>
+            <p>Assigned Roommate:
+                <span th:each="user : ${mondayChore.assignedUsers}">
+                        <span th:text="${user.username} + ' '"></span>
+                    </span>
+            </p>
+            <p th:text="${'Description: ' + mondayChore.description}"></p>
+            <form th:action="@{'/deleteChore/' + ${mondayChore.id}}" method="get" style="display:inline;">
+                <button type="submit">Delete</button>
+            </form>
+        </div>
+    </div>
+
+    <dialog id="MondayModal">
+        <article>
+            <a href="#close" aria-label="Close" class="close" data-target="MondayModal" onClick="toggleModal(event)"></a>
+            <h3>Add Chore for Monday</h3>
             <form action="/addMondayChore" method="post">
                 <label for="mondayUser">Roommate:</label>
                 <select id="mondayUser" name="userId" required>
@@ -165,45 +182,26 @@
 
                 <label for="mondayDescription">Description:</label>
                 <input type="text" id="mondayDescription" name="description" required/>
-                <button type="submit">Add Chore for Monday</button>
+                <button type="submit">Add Chore</button>
             </form>
-
-            <div th:each="mondayChore : ${mondayChores}" class="chore">
-                <h4 th:text="${mondayChore.name}"></h4>
-                <p>Assigned Roommate:
-                    <span th:each="user : ${mondayChore.assignedUsers}">
-                <span th:text="${user.username} + ' '"></span>
-            </span>
-                </p>
-                <p th:text="${'Description: ' + mondayChore.description}"></p>
-                <form th:action="@{'/deleteChore/' + ${mondayChore.id}}" method="get" style="display:inline;">
-                    <button type="submit">Delete</button>
-                </form>
-            </div>
-        </div>
+            <button class="close-modal-button secondary" data-target="MondayModal" onClick="toggleModal(event)">Close</button>
+        </article>
+    </dialog>
 
 
         <!-- Tuesday -->
         <div class="day day-Tuesday">
             <h3>Tuesday</h3>
-            <form action="/addTuesdayChore" method="post">
-                <label for="tuesdayUser">Roommate:</label>
-                <select id="tuesdayUser" name="userId" required>
-                    <option value="" disabled selected>Select a Roommate</option>
-                    <option th:each="user : ${allUsers}" th:value="${user.id}" th:text="${user.username}"></option>
-                </select>
-
-                <label for="tuesdayDescription">Description:</label>
-                <input type="text" id="tuesdayDescription" name="description" required/>
-                <button type="submit">Add Chore for Tuesday</button>
-            </form>
+            <button class="open-modal-button contrast" data-target="TuesdayModal" onClick="toggleModal(event)">
+                Add Chore for Tuesday
+            </button>
 
             <div th:each="tuesdayChore : ${tuesdayChores}" class="chore">
                 <h4 th:text="${tuesdayChore.name}"></h4>
                 <p>Assigned Roommate:
                     <span th:each="user : ${tuesdayChore.assignedUsers}">
-                <span th:text="${user.username} + ' '"></span>
-            </span>
+                        <span th:text="${user.username} + ' '"></span>
+                    </span>
                 </p>
                 <p th:text="${'Description: ' + tuesdayChore.description}"></p>
                 <form th:action="@{'/deleteChore/' + ${tuesdayChore.id}}" method="get" style="display:inline;">
@@ -213,27 +211,38 @@
         </div>
 
 
+        <dialog id="TuesdayModal">
+            <article>
+                <a href="#close" aria-label="Close" class="close" data-target="TuesdayModal" onClick="toggleModal(event)"></a>
+                <h3>Add Chore for Tuesday</h3>
+                <form action="/addTuesdayChore" method="post">
+                    <label for="tuesdayUser">Roommate:</label>
+                    <select id="tuesdayUser" name="userId" required>
+                        <option value="" disabled selected>Select a Roommate</option>
+                        <option th:each="user : ${allUsers}" th:value="${user.id}" th:text="${user.username}"></option>
+                    </select>
+
+                    <label for="tuesdayDescription">Description:</label>
+                    <input type="text" id="tuesdayDescription" name="description" required/>
+                    <button type="submit">Add Chore</button>
+                </form>
+                <button class="close-modal-button secondary" data-target="TuesdayModal" onClick="toggleModal(event)">Close</button>
+            </article>
+        </dialog>
+
         <!-- Wednesday -->
         <div class="day day-Wednesday">
             <h3>Wednesday</h3>
-            <form action="/addWednesdayChore" method="post">
-                <label for="wednesdayUser">Roommate:</label>
-                <select id="wednesdayUser" name="userId" required>
-                    <option value="" disabled selected>Select a Roommate</option>
-                    <option th:each="user : ${allUsers}" th:value="${user.id}" th:text="${user.username}"></option>
-                </select>
-
-                <label for="wednesdayDescription">Description:</label>
-                <input type="text" id="wednesdayDescription" name="description" required/>
-                <button type="submit">Add Chore for Wednesday</button>
-            </form>
+            <button class="open-modal-button contrast" data-target="WednesdayModal" onClick="toggleModal(event)">
+                Add Chore for Wednesday
+            </button>
 
             <div th:each="wednesdayChore : ${wednesdayChores}" class="chore">
                 <h4 th:text="${wednesdayChore.name}"></h4>
                 <p>Assigned Roommate:
                     <span th:each="user : ${wednesdayChore.assignedUsers}">
-                <span th:text="${user.username} + ' '"></span>
-            </span>
+                        <span th:text="${user.username} + ' '"></span>
+                    </span>
                 </p>
                 <p th:text="${'Description: ' + wednesdayChore.description}"></p>
                 <form th:action="@{'/deleteChore/' + ${wednesdayChore.id}}" method="get" style="display:inline;">
@@ -242,28 +251,39 @@
             </div>
         </div>
 
+        <dialog id="WednesdayModal">
+            <article>
+                <a href="#close" aria-label="Close" class="close" data-target="WednesdayModal" onClick="toggleModal(event)"></a>
+                <h3>Add Chore for Wednesday</h3>
+                <form action="/addWednesdayChore" method="post">
+                    <label for="wednesdayUser">Roommate:</label>
+                    <select id="wednesdayUser" name="userId" required>
+                        <option value="" disabled selected>Select a Roommate</option>
+                        <option th:each="user : ${allUsers}" th:value="${user.id}" th:text="${user.username}"></option>
+                    </select>
+
+                    <label for="wednesdayDescription">Description:</label>
+                    <input type="text" id="wednesdayDescription" name="description" required/>
+                    <button type="submit">Add Chore</button>
+                </form>
+                <button class="close-modal-button secondary" data-target="WednesdayModal" onClick="toggleModal(event)">Close</button>
+            </article>
+        </dialog>
+
 
         <!-- Thursday -->
         <div class="day day-Thursday">
             <h3>Thursday</h3>
-            <form action="/addThursdayChore" method="post">
-                <label for="thursdayUser">Roommate:</label>
-                <select id="thursdayUser" name="userId" required>
-                    <option value="" disabled selected>Select a Roommate</option>
-                    <option th:each="user : ${allUsers}" th:value="${user.id}" th:text="${user.username}"></option>
-                </select>
-
-                <label for="thursdayDescription">Description:</label>
-                <input type="text" id="thursdayDescription" name="description" required/>
-                <button type="submit">Add Chore for Thursday</button>
-            </form>
+            <button class="open-modal-button contrast" data-target="ThursdayModal" onClick="toggleModal(event)">
+                Add Chore for Thursday
+            </button>
 
             <div th:each="thursdayChore : ${thursdayChores}" class="chore">
                 <h4 th:text="${thursdayChore.name}"></h4>
                 <p>Assigned Roommate:
                     <span th:each="user : ${thursdayChore.assignedUsers}">
-                <span th:text="${user.username} + ' '"></span>
-            </span>
+                        <span th:text="${user.username} + ' '"></span>
+                    </span>
                 </p>
                 <p th:text="${'Description: ' + thursdayChore.description}"></p>
                 <form th:action="@{'/deleteChore/' + ${thursdayChore.id}}" method="get" style="display:inline;">
@@ -272,27 +292,40 @@
             </div>
         </div>
 
+
+
+        <dialog id="ThursdayModal">
+            <article>
+                <a href="#close" aria-label="Close" class="close" data-target="ThursdayModal" onClick="toggleModal(event)"></a>
+                <h3>Add Chore for Thursday</h3>
+                <form action="/addThursdayChore" method="post">
+                    <label for="thursdayUser">Roommate:</label>
+                    <select id="thursdayUser" name="userId" required>
+                        <option value="" disabled selected>Select a Roommate</option>
+                        <option th:each="user : ${allUsers}" th:value="${user.id}" th:text="${user.username}"></option>
+                    </select>
+
+                    <label for="thursdayDescription">Description:</label>
+                    <input type="text" id="thursdayDescription" name="description" required/>
+                    <button type="submit">Add Chore</button>
+                </form>
+                <button class="close-modal-button secondary" data-target="ThursdayModal" onClick="toggleModal(event)">Close</button>
+            </article>
+        </dialog>
+
         <!-- Friday -->
         <div class="day day-Friday">
             <h3>Friday</h3>
-            <form action="/addFridayChore" method="post">
-                <label for="fridayUser">Roommate:</label>
-                <select id="fridayUser" name="userId" required>
-                    <option value="" disabled selected>Select a Roommate</option>
-                    <option th:each="user : ${allUsers}" th:value="${user.id}" th:text="${user.username}"></option>
-                </select>
-
-                <label for="fridayDescription">Description:</label>
-                <input type="text" id="fridayDescription" name="description" required/>
-                <button type="submit">Add Chore for Friday</button>
-            </form>
+            <button class="open-modal-button contrast" data-target="FridayModal" onClick="toggleModal(event)">
+                Add Chore for Friday
+            </button>
 
             <div th:each="fridayChore : ${fridayChores}" class="chore">
                 <h4 th:text="${fridayChore.name}"></h4>
                 <p>Assigned Roommate:
                     <span th:each="user : ${fridayChore.assignedUsers}">
-                <span th:text="${user.username} + ' '"></span>
-            </span>
+                        <span th:text="${user.username} + ' '"></span>
+                    </span>
                 </p>
                 <p th:text="${'Description: ' + fridayChore.description}"></p>
                 <form th:action="@{'/deleteChore/' + ${fridayChore.id}}" method="get" style="display:inline;">
@@ -301,27 +334,38 @@
             </div>
         </div>
 
+        <dialog id="FridayModal">
+            <article>
+                <a href="#close" aria-label="Close" class="close" data-target="FridayModal" onClick="toggleModal(event)"></a>
+                <h3>Add Chore for Friday</h3>
+                <form action="/addFridayChore" method="post">
+                    <label for="fridayUser">Roommate:</label>
+                    <select id="fridayUser" name="userId" required>
+                        <option value="" disabled selected>Select a Roommate</option>
+                        <option th:each="user : ${allUsers}" th:value="${user.id}" th:text="${user.username}"></option>
+                    </select>
+
+                    <label for="fridayDescription">Description:</label>
+                    <input type="text" id="fridayDescription" name="description" required/>
+                    <button type="submit">Add Chore</button>
+                </form>
+                <button class="close-modal-button secondary" data-target="FridayModal" onClick="toggleModal(event)">Close</button>
+            </article>
+        </dialog>
+
         <!-- Saturday -->
         <div class="day day-Saturday">
             <h3>Saturday</h3>
-            <form action="/addSaturdayChore" method="post">
-                <label for="saturdayUser">Roommate:</label>
-                <select id="saturdayUser" name="userId" required>
-                    <option value="" disabled selected>Select a Roommate</option>
-                    <option th:each="user : ${allUsers}" th:value="${user.id}" th:text="${user.username}"></option>
-                </select>
-
-                <label for="saturdayDescription">Description:</label>
-                <input type="text" id="saturdayDescription" name="description" required/>
-                <button type="submit">Add Chore for Saturday</button>
-            </form>
+            <button class="open-modal-button contrast" data-target="SaturdayModal" onClick="toggleModal(event)">
+                Add Chore for Saturday
+            </button>
 
             <div th:each="saturdayChore : ${saturdayChores}" class="chore">
                 <h4 th:text="${saturdayChore.name}"></h4>
                 <p>Assigned Roommate:
                     <span th:each="user : ${saturdayChore.assignedUsers}">
-                <span th:text="${user.username} + ' '"></span>
-            </span>
+                        <span th:text="${user.username} + ' '"></span>
+                    </span>
                 </p>
                 <p th:text="${'Description: ' + saturdayChore.description}"></p>
                 <form th:action="@{'/deleteChore/' + ${saturdayChore.id}}" method="get" style="display:inline;">
@@ -329,6 +373,26 @@
                 </form>
             </div>
         </div>
+
+        <dialog id="SaturdayModal">
+            <article>
+                <a href="#close" aria-label="Close" class="close" data-target="SaturdayModal" onClick="toggleModal(event)"></a>
+                <h3>Add Chore for Saturday</h3>
+                <form action="/addSaturdayChore" method="post">
+                    <label for="saturdayUser">Roommate:</label>
+                    <select id="saturdayUser" name="userId" required>
+                        <option value="" disabled selected>Select a Roommate</option>
+                        <option th:each="user : ${allUsers}" th:value="${user.id}" th:text="${user.username}"></option>
+                    </select>
+
+                    <label for="saturdayDescription">Description:</label>
+                    <input type="text" id="saturdayDescription" name="description" required/>
+                    <button type="submit">Add Chore</button>
+                </form>
+                <button class="close-modal-button secondary" data-target="SaturdayModal" onClick="toggleModal(event)">Close</button>
+            </article>
+        </dialog>
+
 
 
     </div>
@@ -345,22 +409,10 @@
     </form>
 
 
-<!--    <h2>Future Tasks:</h2>-->
-<!--    <div class="tasks">-->
-<!--        <div th:each="futureTask : ${futureTasks}" class="task">-->
-<!--            <h3 th:text="${futureTask.name}"></h3>-->
-<!--            <p th:text="${'Due Date: ' + futureTask.dueDate}"></p>-->
-<!--            <p th:text="${'Description: ' + futureTask.description}"></p>-->
-<!--            <form th:action="@{/deleteChore/__${futureTask.id}__}" method="get">-->
-<!--                <button type="submit">Delete</button>-->
-<!--            </form>-->
-<!--        </div>-->
-<!--    </div>-->
-
     <h2>Future Tasks:</h2>
     <div class="tasks">
         <div th:each="futureTask : ${futureTasks}" class="task">
-            <h3 th:text="${futureTask.name}"></h3>
+            <p th:text="${futureTask.name}"> Assigned Roommate</p>
             <p th:text="${'Due Date: ' + futureTask.dueDate}"></p>
             <p th:text="${'Description: ' + futureTask.description}"></p>
 
@@ -373,6 +425,7 @@
                     <option value="Wednesday">Wednesday</option>
                     <option value="Thursday">Thursday</option>
                     <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
                 </select>
                 <button type="submit">Move to Selected Day</button>
             </form>
@@ -382,8 +435,24 @@
             </form>
         </div>
     </div>
+    </div>
 
 </main>
 
+<script>
+    function openModal(day) {
+        const modal = document.getElementById(`${day}Modal`);
+        modal.style.display = "block";
+    }
+
+    function closeModal(day) {
+        const modal = document.getElementById(`${day}Modal`);
+        modal.style.display = "none";
+    }
+</script>
+
 </body>
 </html>
+
+
+

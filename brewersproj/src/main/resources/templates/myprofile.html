@@ -38,7 +38,7 @@
     <!--        }-->
 
     <!--        .details {-->
-    <!--            flex: 1; /* This ensures that the details section takes up the remaining space after the image */-->
+    <!--            flex: 1;
     <!--        }-->
 
             .profile-pic {
@@ -72,13 +72,45 @@
 
         <article class="profile-details">
 
-            <header><img
+
+
+            <header>
+                <img
                     src="https://images.unsplash.com/photo-1425082661705-1834bfd09dca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2076&q=80"
-                    alt="Profile Picture" class="profile-pic"></header>
+                    alt="Profile Picture" class="profile-pic">
+
+
+            </header>
             <p><span class="label">Username:</span> [[${username}]]</p>
             <p><span class="label">First Name:</span> [[${currentUser.firstName}]]</p>
             <p><span class="label">Last Name:</span> [[${currentUser.lastName}]]</p>
             <p><span class="label">Email:</span> [[${currentUser.email}]]</p>
+
+
+
+
+<!--            <form action="/selectAvatar" method="post">-->
+<!--                <label style="display: inline-block; margin-right: 10px;">-->
+<!--                    <input type="radio" name="selectedAvatar" value="avatar1.jpg"> Cutie Hamster-->
+<!--                    <img src="https://images.unsplash.com/photo-1425082661705-1834bfd09dca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2076&q=80"-->
+<!--                         alt="Profile Picture" class="profile-pic">-->
+<!--                </label>-->
+<!--                <label style="display: inline-block; margin-right: 10px;">-->
+<!--                    <input type="radio" name="selectedAvatar" value="avatar2.jpg"> Cool Cat-->
+<!--                    <img src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80"-->
+<!--                         alt="Profile Picture" class="profile-pic">-->
+<!--                </label>-->
+<!--                <label style="display: inline-block;">-->
+<!--                    <input type="radio" name="selectedAvatar" value="avatar4.jpg"> Spooky Pup-->
+<!--                    <img src="https://images.unsplash.com/photo-1604186838347-9faaf0b83be8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80"-->
+<!--                         alt="Profile Picture" class="profile-pic">-->
+<!--                </label>-->
+<!--                <button type="submit">Select Avatar</button>-->
+<!--            </form>-->
+
+
+            </article>
+
 
         </article>
     </div>
