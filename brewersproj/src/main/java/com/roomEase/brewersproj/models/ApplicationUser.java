@@ -19,9 +19,11 @@ public class ApplicationUser implements UserDetails {
     String email;
     Boolean roles;
     Long telephone;
+
     @ManyToOne
     @JoinColumn(name = "household_id")
     private Household household;
+
 
     //Each user can have multiple chores to do, and each chore can be assigned to multiple users.
     @ManyToMany
@@ -31,7 +33,9 @@ public class ApplicationUser implements UserDetails {
     private List<Chore> chores;
 
 
+
     public ApplicationUser(Long id, String firstName, String lastName, String username, String password, String email, Boolean roles, Long telephone) {
+
 
         this.id = id;
         this.firstName = firstName;
@@ -42,6 +46,7 @@ public class ApplicationUser implements UserDetails {
         this.roles = roles;
         this.telephone = telephone;
     }
+
 
 
     public ApplicationUser() {

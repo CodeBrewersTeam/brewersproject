@@ -12,10 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.servlet.view.RedirectView;
 import java.security.Principal;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Controller
 public class ApplicationUserController {
@@ -42,7 +45,6 @@ public class ApplicationUserController {
     public String getSignUpPage(){
         return "signup.html";
     }
-
 
     @GetMapping("/aboutUs")
     public String aboutUsPage() {
@@ -102,6 +104,7 @@ public class ApplicationUserController {
         return "index.html";
     }
 
+    // myflatmates page
 
     @GetMapping("/users")
     public String getUsersByHouseholdId(Model m, Principal p) {
@@ -118,11 +121,17 @@ public class ApplicationUserController {
                 m.addAttribute("users", usersInSameHousehold);
             }
         }
-
         return "myFlat.html";
     }
 
+    @GetMapping("/users/{id}")
+    public String getUserInfo(Model model, Principal p, @PathVariable Long id){
+        ApplicationUser foundUser = applicationUserRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("User not found with ID: " + id));
+        model.addAttribute("foundUser", foundUser);
 
+        return "users.html";
+    }
 
     // EVERYTHING above is working. You should be able to login and go to myprofiles page and create account
 
@@ -136,6 +145,23 @@ public class ApplicationUserController {
             model.addAttribute("username", username);
         }
         return "myprofile";
+    }
+
+    //Updating User Profile
+    @PostMapping("/myprofile/update")
+    public RedirectView updateUserProfile(Principal principal, String firstName, String lastName, String email, Long telephone) {
+        if (principal != null) {
+            String username = principal.getName();
+            ApplicationUser currentUser = applicationUserRepository.findByUsername(username);
+
+            currentUser.setFirstName(firstName);
+            currentUser.setLastName(lastName);
+            currentUser.setEmail(email);
+            currentUser.setTelephone(telephone);
+
+            applicationUserRepository.save(currentUser);
+        }
+        return new RedirectView("/myprofile");
     }
 
 }
