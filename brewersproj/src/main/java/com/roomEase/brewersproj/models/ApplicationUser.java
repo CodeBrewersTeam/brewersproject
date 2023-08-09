@@ -28,9 +28,6 @@ public class ApplicationUser implements UserDetails {
 //    @JoinColumn(name = "household_id")
 //    public Household household;
 
-
-
-
     public ApplicationUser(Long id, String firstName, String lastName, String username, String password, String email, String householdId, Boolean admin, Long telephone) {
 
         this.id = id;

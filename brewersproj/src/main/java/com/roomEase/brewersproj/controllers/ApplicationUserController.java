@@ -132,40 +132,6 @@ public class ApplicationUserController {
 
 
 
-    @GetMapping("/users/{id}")
-    public String getUserInfo(Model m, Principal p, @PathVariable Long id) {
-        if (p != null) {
-            String username = p.getName();
-            ApplicationUser applicationUser = applicationUserRepository.findByUsername(username);
-
-            m.addAttribute("BrowsingUserUsername", username);
-            m.addAttribute("BrowsingLastName", applicationUser.getLastName());
-            m.addAttribute("BrowsingFirstName", applicationUser.getFirstName());
-        }
-        ApplicationUser applicationUser = applicationUserRepository.findById(id).orElseThrow();
-        m.addAttribute("applicationUserUsername", applicationUser.getUsername());
-        m.addAttribute("applicationUserFirstName", applicationUser.getFirstName());
-        m.addAttribute("applicationUserLastName", applicationUser.getLastName());
-
-
-        return "/user-info.html";
-    }
-
-    @PutMapping("/users/{id}")
-    public RedirectView editUserInfo(Principal p, @PathVariable Long id, String username, String firstName, String lastName) {
-        if (p != null) {
-            ApplicationUser applicationUser = applicationUserRepository.findById(id).orElseThrow();
-            applicationUser.setUsername(username);
-            applicationUser.setFirstName(firstName);
-            applicationUser.setLastName(lastName);
-            applicationUserRepository.save(applicationUser);
-        }
-        return new RedirectView("/users/" + id);
-    }
-
-
-
-
 
 
 
@@ -199,6 +165,47 @@ public class ApplicationUserController {
             applicationUserRepository.save(currentUser);
         }
         return new RedirectView("/myprofile");
+    }
+
+
+
+    //acccounts' application page
+
+    @GetMapping("/users/{id}")
+    public String getUserInfo(Model m, Principal p, @PathVariable Long id) {
+        if (p != null) {
+            String username = p.getName();
+            ApplicationUser applicationUser = applicationUserRepository.findByUsername(username);
+
+            m.addAttribute("BrowsingUserUsername", username);
+            m.addAttribute("BrowsingLastName", applicationUser.getLastName());
+            m.addAttribute("BrowsingFirstName", applicationUser.getFirstName());
+            m.addAttribute("applicationUserEmail", applicationUser.getEmail());
+            m.addAttribute("applicationUserTelephone", applicationUser.getTelephone());
+        }
+        ApplicationUser applicationUser = applicationUserRepository.findById(id).orElseThrow();
+        m.addAttribute("applicationUserUsername", applicationUser.getUsername());
+        m.addAttribute("applicationUserFirstName", applicationUser.getFirstName());
+        m.addAttribute("applicationUserLastName", applicationUser.getLastName());
+        m.addAttribute("applicationUserEmail", applicationUser.getEmail());
+        m.addAttribute("applicationUserTelephone", applicationUser.getTelephone());
+
+
+        return "/user-info.html";
+    }
+
+    @PutMapping("/users/{id}")
+    public RedirectView editUserInfo(Principal p, @PathVariable Long id, String username, String firstName, String lastName, String email, Long telephone) {
+        if (p != null) {
+            ApplicationUser applicationUser = applicationUserRepository.findById(id).orElseThrow();
+            applicationUser.setUsername(username);
+            applicationUser.setFirstName(firstName);
+            applicationUser.setLastName(lastName);
+            applicationUser.setEmail(email);
+            applicationUser.setTelephone(telephone);
+            applicationUserRepository.save(applicationUser);
+        }
+        return new RedirectView("/users/" + id);
     }
 
 }
