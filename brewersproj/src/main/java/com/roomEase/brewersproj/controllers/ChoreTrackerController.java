@@ -79,6 +79,7 @@ public class ChoreTrackerController {
                 // Handle this situation, maybe redirect to an error page or login
                 return "errorPage.html";
             }
+
             List<ApplicationUser> usersInSameHousehold = userRepository.findByHouseholdId(currentUser.getHouseholdId());
             List<String> roommates = usersInSameHousehold.stream()
                     .map(ApplicationUser::getUsername)
