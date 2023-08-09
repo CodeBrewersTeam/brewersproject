@@ -6,13 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="7aa7b91b-18e7-4c61-bd47-601596f0c2fe" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brewersproj/src/main/java/com/roomEase/brewersproj/controllers/ApplicationUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/brewersproj/src/main/java/com/roomEase/brewersproj/controllers/ApplicationUserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/brewersproj/src/main/java/com/roomEase/brewersproj/controllers/ChoreTrackerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/brewersproj/src/main/java/com/roomEase/brewersproj/controllers/ChoreTrackerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brewersproj/src/main/java/com/roomEase/brewersproj/models/ApplicationUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/brewersproj/src/main/java/com/roomEase/brewersproj/models/ApplicationUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brewersproj/src/main/java/com/roomEase/brewersproj/models/Chore.java" beforeDir="false" afterPath="$PROJECT_DIR$/brewersproj/src/main/java/com/roomEase/brewersproj/models/Chore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brewersproj/src/main/java/com/roomEase/brewersproj/repositories/ApplicationUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/brewersproj/src/main/java/com/roomEase/brewersproj/repositories/ApplicationUserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/brewersproj/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/brewersproj/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brewersproj/src/main/resources/templates/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/brewersproj/src/main/resources/templates/signup.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,14 +60,14 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "roles",
-    "last_opened_file_path": "C:/Users/soomr/Documents/Projects/Code-401/brewersproject/brewersproj"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;roles&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/soomr/Documents/Projects/Code-401/brewersproject/brewersproj&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.roomEase.brewersproj.BrewersprojApplication" />
